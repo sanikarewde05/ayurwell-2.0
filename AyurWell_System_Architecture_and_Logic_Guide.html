@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AyurWell System Architecture, Logic & Principles Guide</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1F2937;
+    background-color: #FFFFFF;
+    line-height: 1.6;
+    font-size: 11pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Cover & Headers */
+  .header-cover {
+    border-bottom: 3px double #1B4D3E;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+
+  .badge-app {
+    display: inline-block;
+    background: #E8F5E9;
+    color: #1B4D3E;
+    font-weight: 700;
+    font-size: 9pt;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid #A5D6A7;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    color: #1B4D3E;
+    font-size: 24pt;
+    margin: 6px 0 10px 0;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    color: #4B5563;
+    font-size: 11.5pt;
+    margin: 0 0 12px 0;
+    font-weight: 400;
+  }
+
+  .meta-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9pt;
+    color: #6B7280;
+    border-top: 1px solid #E5E7EB;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+
+  /* Section Styling */
+  .section-block {
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+  }
+
+  h2 {
+    color: #1B4D3E;
+    font-size: 15pt;
+    border-bottom: 2px solid #E5E7EB;
+    padding-bottom: 6px;
+    margin-top: 24px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h3 {
+    color: #2D3748;
+    font-size: 12pt;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+    text-align: justify;
+  }
+
+  /* Pillar Grid */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 14px 0;
+  }
+
+  .pillar-card {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .pillar-title {
+    font-weight: 700;
+    color: #1B4D3E;
+    font-size: 10.5pt;
+    margin-bottom: 4px;
+  }
+
+  .pillar-content {
+    font-size: 9.5pt;
+    color: #4B5563;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 9.5pt;
+  }
+
+  th, td {
+    padding: 8px 10px;
+    text-align: left;
+    border: 1px solid #E5E7EB;
+  }
+
+  th {
+    background-color: #F3F4F6;
+    color: #1F2937;
+    font-weight: 700;
+    font-size: 9.5pt;
+  }
+
+  tr:nth-child(even) {
+    background-color: #FDFBF8;
+  }
+
+  /* Code & Formula Blocks */
+  .code-box {
+    background-color: #F8FAFC;
+    border-left: 4px solid #1B4D3E;
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 9pt;
+    color: #0F172A;
+    margin: 10px 0 14px 0;
+    white-space: pre-wrap;
+    line-height: 1.45;
+  }
+
+  /* Highlights / Callouts */
+  .callout {
+    background-color: #FAF5EE;
+    border: 1px solid #EAD8C3;
+    border-left: 4px solid #B87333;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 9.5pt;
+  }
+
+  .callout-title {
+    font-weight: bold;
+    color: #7A4E21;
+    margin-bottom: 4px;
+  }
+
+  .security-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 8pt;
+    background: #E0E7FF;
+    color: #3730A3;
+  }
+
+  ul, ol {
+    margin: 6px 0 12px 20px;
+    padding: 0;
+    font-size: 10pt;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER COVER -->
+<div class="header-cover">
+  <span class="badge-app">AyurWell Technical & Ayurvedic Architecture Guide</span>
+  <h1>AyurWell System Modules & Security Architecture</h1>
+  <div class="subtitle">
+    In-Depth Specification of Working, Algorithmic Logic, Ayurvedic Clinical Principles, and Security Implementations
+  </div>
+  <div class="meta-bar">
+    <span><strong>Platform:</strong> Spring Boot 3.2.3, Vite + React, H2/MySQL</span>
+    <span><strong>Standards:</strong> Charaka Samhita, Sushruta Samhita, CCRAS, ICMR-NIN RDA, OWASP</span>
+    <span><strong>Author:</strong> AyurWell Engineering & Clinical Core</span>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- MODULE 1: AUTHENTICATION & REGISTRATION -->
+<!-- ========================================== -->
+<div class="section-block">
+  <h2>1. Log In and Sign Up (Authentication & OTP Verification) Module</h2>
+  
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="pillar-title">1. Working Flow</div>
+      <div class="pillar-content">
+        User submits registration or login data; backend verifies credentials, coordinates 6-digit cryptographic OTP generation via Java SecureRandom, sends real email verification via SMTP, and returns a signed JWT upon completion.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">2. Programmatic Logic</div>
+      <div class="pillar-content">
+        Enforces 30-second cooldown rate limiting, 5-minute OTP Time-To-Live (TTL), maximum 5 failed attempts per OTP lifecycle, and BCrypt one-way password/OTP hashing before persistence in database.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">3. Ayurvedic Principle</div>
+      <div class="pillar-content">
+        <strong>Prajnaparadha (Intellectual Integrity) &amp; Shaucha (Purity):</strong> Clean boundary establishment where individual identity and personal biological profile are protected, maintaining user trust and ethical medicine standards.
+      </div>
+    </div>
+  </div>
+
+  <h3>A. Step-by-Step Working Mechanism</h3>
+  <ol>
+    <li><strong>User Registration (<code>POST /api/v1/auth/register</code>):</strong>
+      Receives <code>email</code>, <code>password</code>, <code>fullName</code>, age, gender, height, weight, activity level, and budget. The service checks email uniqueness. It encodes the plaintext password using BCrypt and persists the new <code>User</code> and blank <code>UserProfile</code> in a single transactional unit (<code>@Transactional</code>).
+    </li>
+    <li><strong>OTP Generation &amp; Dispatch (<code>POST /api/v1/auth/send-otp</code>):</strong>
+      Initiated during user verification or password resets. Validates the email format. Queries the latest OTP in <code>email_otps</code>; if requested within 30 seconds, it throws a rate-limit exception. Otherwise, it generates an integer between <code>100000</code> and <code>999999</code> using <code>java.security.SecureRandom</code>. The OTP is hashed via BCrypt and saved with a 5-minute expiry timestamp. An HTML email with the raw OTP is sent via Gmail SMTP.
+    </li>
+    <li><strong>OTP Verification (<code>POST /api/v1/auth/verify-otp</code>):</strong>
+      Validates length and format. Retrieves the latest record. If <code>attempts &gt;= 5</code> or current time is past <code>expiresAt</code>, execution is halted with specific user alerts. If <code>passwordEncoder.matches(rawOtp, otpRecord.getOtpHash())</code> evaluates true, the OTP is marked verified and the user's <code>emailVerified</code> status is permanently activated.
+    </li>
+    <li><strong>Login Authentication (<code>POST /api/v1/auth/login</code>):</strong>
+      Verifies existence of email in the user table. Validates credentials via <code>passwordEncoder.matches(...)</code>. Upon success, checks whether the user's health profile and dosha questionnaire are completed. Synthesizes a signed JSON Web Token (JWT) with user ID and email claims, returning an <code>AuthResponse</code> containing JWT, user identity, dosha status, and an AyurScore.
+    </li>
+  </ol>
+
+  <h3>B. Key Algorithmic Logic &amp; Formulas</h3>
+  <div class="code-box">// 1. Cryptographically Secure OTP Generation
+int otpNumber = 100000 + secureRandom.nextInt(900000); // Guarantees exact 6 digits
+String hashedOtp = passwordEncoder.encode(String.valueOf(otpNumber));
+
+// 2. Rate Limiting Check (30 seconds)
+if (lastOtp.getCreatedAt().plusSeconds(30).isAfter(LocalDateTime.now())) {
+    long waitSecs = Duration.between(LocalDateTime.now(), lastOtp.getCreatedAt().plusSeconds(30)).getSeconds();
+    throw new RuntimeException("Resend available in " + Math.max(1, waitSecs) + "s.");
+}
+
+// 3. Email Privacy Masking Logic
+name.substring(0, 2) + "***@" + domain; // Turns "snehaajaydubey@gmail.com" into "sn***@gmail.com"</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================== -->
+<!-- MODULE 2: DOSHA ASSESSMENT -->
+<!-- ========================================== -->
+<div class="section-block">
+  <h2>2. Dosha Assessment (Prakriti Determination) Module</h2>
+
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="pillar-title">1. Working Flow</div>
+      <div class="pillar-content">
+        Presents standardized CCRAS (Central Council for Research in Ayurvedic Sciences) questions capturing physical, physiological, and psychological traits. Computes dominant and secondary constitutional doshas.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">2. Programmatic Logic</div>
+      <div class="pillar-content">
+        Aggregates categorized responses into Vata, Pitta, and Kapha accumulator variables; applies tie-breaker hierarchy algorithms; calculates relative percentages; maps tailored herb and lifestyle regimens.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">3. Ayurvedic Principle</div>
+      <div class="pillar-content">
+        <strong>Tridosha Siddhanta (Tri-Bioenergy Doctrine):</strong> Vata (Ether + Air), Pitta (Fire + Water), and Kapha (Water + Earth). Determines <em>Deha Prakriti</em> (inborn genetic blueprint) to identify vulnerability to imbalances (<em>Vikriti</em>).
+      </div>
+    </div>
+  </div>
+
+  <h3>A. Step-by-Step Working Mechanism</h3>
+  <ol>
+    <li><strong>Questionnaire Delivery &amp; Submission:</strong>
+      The client requests diagnostic questions evaluating physical build (skeletal frame, skin texture, hair, teeth), physiological tendencies (digestion, appetite, temperature tolerance, bowel habits), and psychological traits (memory, stress response, emotional patterns).
+    </li>
+    <li><strong>Score Aggregation:</strong>
+      Each answer maps strictly to <code>VATA</code>, <code>PITTA</code>, or <code>KAPHA</code>. <code>DoshaAssessmentService.calculateAndSavePrakriti()</code> iterates through all submissions, incrementing respective score tallies ($V$, $P$, $K$).
+    </li>
+    <li><strong>Primary &amp; Secondary Classification Algorithm:</strong>
+      Determines the dominant bio-energy through comparative priority. A distinct secondary dosha is identified by evaluating the runner-up score, recognizing dual-dosha phenotypes (e.g., Pitta-Vata or Vata-Kapha).
+    </li>
+    <li><strong>Profile Persistence &amp; Dynamic Advice:</strong>
+      Saves assessment in <code>dosha_assessments</code> table with timestamp. Updates <code>user_profiles.primary_dosha</code> and sets <code>profile_completed = true</code>. Returns customized dietary rules, lifestyle guidance (<em>Dinacharya</em>), and classical herbs.
+    </li>
+  </ol>
+
+  <h3>B. Mathematical Logic &amp; Dominance Equations</h3>
+  <div class="code-box">// Score Percentage Calculation
+Total = Vata_Score + Pitta_Score + Kapha_Score;
+Pitta_Percentage = Math.round((Pitta_Score * 100.0) / Total);
+Vata_Percentage  = Math.round((Vata_Score * 100.0) / Total);
+Kapha_Percentage = Math.max(0, 100 - Pitta_Percentage - Vata_Percentage);
+
+// Primary Classification Priority
+if (V >= P && V >= K) return DoshaType.VATA;
+else if (P >= V && P >= K) return DoshaType.PITTA;
+else return DoshaType.KAPHA;</div>
+
+  <h3>C. Ayurvedic Principles &amp; Dosha Attributes (Charaka Samhita Sutrasthana 1/59-61)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Dosha</th>
+        <th>Constituent Elements (Mahabhutas)</th>
+        <th>Governing Physiological Functions</th>
+        <th>Qualities (Gunas)</th>
+        <th>Therapeutic Balancing Strategy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Vata</strong></td>
+        <td>Akasha (Ether) + Vayu (Air)</td>
+        <td>Respiration, neuromuscular transmission, cardiac pulsation, cellular motion, sensory perception.</td>
+        <td>Ruksha (Dry), Laghu (Light), Sheeta (Cold), Khara (Rough), Chala (Mobile).</td>
+        <td>Sweet, sour, salty tastes; warm, unctuous (Sneha), moist, grounding foods; Abhyanga with sesame oil.</td>
+      </tr>
+      <tr>
+        <td><strong>Pitta</strong></td>
+        <td>Agni (Fire) + Jala (Water)</td>
+        <td>Digestion, enzymatic transformation, metabolic heat, vision, skin luster, intellect.</td>
+        <td>Sasneha (Oily), Tikshna (Sharp/Penetrating), Ushna (Hot), Sara (Flowing), Drava (Liquid).</td>
+        <td>Sweet, bitter, astringent tastes; cooling, soothing, moderate fats (A2 Ghee, coconut water); Sheetali pranayama.</td>
+      </tr>
+      <tr>
+        <td><strong>Kapha</strong></td>
+        <td>Jala (Water) + Prithvi (Earth)</td>
+        <td>Biological stability, musculoskeletal lubrication, immunity (Ojas), hydration, tissue cohesion.</td>
+        <td>Guru (Heavy), Sheeta (Cold), Mridu (Soft), Snigdha (Unctuous), Sandra (Dense), Sthira (Static).</td>
+        <td>Pungent, bitter, astringent tastes; light, warm, dry foods, steamed greens, millets, ginger, vigorous exercise.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================== -->
+<!-- MODULE 3: DISEASE DIET PLANNER -->
+<!-- ========================================== -->
+<div class="section-block">
+  <h2>3. Disease Diet Planner (Therapeutic Nutrition) Module</h2>
+
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="pillar-title">1. Working Flow</div>
+      <div class="pillar-content">
+        Synthesizes biometric traits, dosha prakriti, target clinical diagnosis, season, budget, and meal slots to generate an evidence-based 7-day personalized meal plan with real nutritional analytics.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">2. Programmatic Logic</div>
+      <div class="pillar-content">
+        Mifflin-St Jeor BMR &amp; TDEE calculation with disease-specific caloric adaptations; multi-day slot mapping (Breakfast, Lunch, Dinner, Mid-Meals); macro and micronutrient averaging; recipe swap engine.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">3. Ayurvedic Principle</div>
+      <div class="pillar-content">
+        <strong>Pathya-Apathya &amp; Shad Rasa (Six Tastes):</strong> <em>"When diet is wrong, medicine is of no use; when diet is correct, medicine is of no need."</em> Balances Virya (potency), Vipaka (post-digestive effect), and Jatharagni.
+      </div>
+    </div>
+  </div>
+
+  <h3>A. Step-by-Step Working Mechanism</h3>
+  <ol>
+    <li><strong>Requirement Ingestion:</strong>
+      Receives target disease condition (e.g., Diabetes/Madhumeha, Hypertension/Raktachapa, GERD/Amlapitta, Obesity/Medoroga, Anemia/Pandu), season (<em>Ritu</em>), budget, allergies, and included meal slots.
+    </li>
+    <li><strong>Caloric Need Calculation (BMR &amp; TDEE):</strong>
+      Calculates Base Metabolic Rate using weight ($kg$), height ($cm$), age, and biological sex, multiplied by the physical activity coefficient, adjusted for clinical parameters (e.g., $-300$ kcal for Obesity).
+    </li>
+    <li><strong>Therapeutic Slot Selection &amp; Recipe Assembly:</strong>
+      Retrieves compliant recipes mapped to the user's primary dosha and clinical condition from the repository. Each meal provides calories, protein, carbs, fats, dietary fiber, iron, calcium, vitamin B12, vitamin D, and folate.
+    </li>
+    <li><strong>Clinical &amp; Ayurvedic Parameter Synthesis:</strong>
+      Generates the <em>AyurScore</em> (0-100), contra-indicated foods to avoid (<em>Apathya</em>), clinical tips, and specific pharmacodynamic properties (<em>Rasa</em>, <em>Guna</em>, <em>Virya</em>, <em>Vipaka</em>).
+    </li>
+  </ol>
+
+  <h3>B. Key Scientific &amp; Algorithmic Formulas</h3>
+  <div class="code-box">// Mifflin-St Jeor BMR Equation
+if (isMale) {
+    BMR = (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * age) + 5.0;
+} else {
+    BMR = (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * age) - 161.0;
+}
+TDEE = BMR * ActivityMultiplier; // Sedentary: 1.2, Moderate: 1.55, Active: 1.725
+
+// Clinical Caloric Adjustments
+if (disease.equals("Obesity / Weight Management")) {
+    TargetCalories = Math.max(1300.0, TDEE - 300.0);
+} else if (disease.equals("Diabetes")) {
+    TargetCalories = Math.min(TargetCalories, 1800.0);
+}</div>
+
+  <h3>C. Ayurvedic Dietetic Correlations by Clinical Condition</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Disease / Condition</th>
+        <th>Ayurvedic Diagnosis</th>
+        <th>Vitiated Dosha / Srotas</th>
+        <th>Pathya (Therapeutic Foods to Favor)</th>
+        <th>Apathya (Foods to Restrict / Avoid)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Diabetes Mellitus</strong></td>
+        <td>Madhumeha / Prameha</td>
+        <td>Kapha-Vata / Medovaha Srotas</td>
+        <td>Barley (Jav), Bitter gourd (Karela), Fenugreek, Moong dal, Jamun seeds, Cinnamon, Triphala.</td>
+        <td>Refined sugars, jaggery in excess, white flour, day-time sleep, excessive sweet fruits.</td>
+      </tr>
+      <tr>
+        <td><strong>Hypertension</strong></td>
+        <td>Raktachapa / Uchha Rakta Vata</td>
+        <td>Pitta-Vata / Raktavaha Srotas</td>
+        <td>Sarpagandha, Bottle gourd (Lauki), Celery, Pomegranate, Flaxseeds, Sendha Namak (Rock Salt).</td>
+        <td>Table salt (NaCl), pickles, aged cheese, red meat, alcohol, high-sodium fried snacks.</td>
+      </tr>
+      <tr>
+        <td><strong>Acid Reflux / GERD</strong></td>
+        <td>Amlapitta</td>
+        <td>Pitta (Tikshna/Amla Guna) / Annavaha Srotas</td>
+        <td>Coconut water, Amla, Coriander-Fennel tea, Soaked raisins, Cow ghee, Puffed rice (Laja).</td>
+        <td>Deep-fried food, vinegar, green chillies, fermented batter, sour curd at night, citrus fruits.</td>
+      </tr>
+      <tr>
+        <td><strong>Obesity / Weight Gain</strong></td>
+        <td>Sthaulya / Medoroga</td>
+        <td>Kapha-Medas / Sluggish Medo-Dhatu</td>
+        <td>Honey with warm water, Jowar, Bajra, Sprouted horse gram (Kulittha), Takra (Buttermilk) with jeera.</td>
+        <td>Bakery desserts, ice-creams, refined oils, heavy oily curries, eating before prior meal is digested.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================== -->
+<!-- MODULE 4: WOMEN'S HEALTH -->
+<!-- ========================================== -->
+<div class="section-block">
+  <h2>4. Women's Health &amp; Menstrual Harmony Module</h2>
+
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="pillar-title">1. Working Flow</div>
+      <div class="pillar-content">
+        Logs daily cycle parameters, period flows, cramps, mood, and iron intake. Dynamically predicts the active menstrual cycle phase, calculates next period dates, and outputs tailored reproductive phase nutrition.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">2. Programmatic Logic</div>
+      <div class="pillar-content">
+        Modulo temporal arithmetic <code>(daysPassed % cycleLength) + 1</code>; four-phase cycle segmentation; daily wellness score algorithm (0-100); dedicated stages for Menstruation, PCOS, Pregnancy (Trimesters 1-3), Postpartum, and Menopause.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">3. Ayurvedic Principle</div>
+      <div class="pillar-content">
+        <strong>Stri Roga &amp; Prasuti Tantra (Ayurvedic Gynecology):</strong> Guided by <em>Rajaswala Paricharya</em> (menstrual regimen), <em>Garbhini Paricharya</em> (antenatal regimens), <em>Sutika Paricharya</em> (40-day postpartum restorative healing), and <em>Apana Vayu</em> regulation.
+      </div>
+    </div>
+  </div>
+
+  <h3>A. Step-by-Step Working Mechanism</h3>
+  <ol>
+    <li><strong>Cycle Math &amp; Real-time Phase Estimation:</strong>
+      Computes the elapsed days between <code>lastPeriodDate</code> and <code>LocalDate.now()</code>. Using the user's customized cycle length (default 28 days), it derives the exact cycle day and next estimated cycle onset.
+    </li>
+    <li><strong>Four-Phase Menstrual Segmentation:</strong>
+      <ul>
+        <li><strong>Days 1 to Period Duration (e.g., Days 1–5):</strong> <em>Menstrual Phase (Apana Vayu Active)</em>. Downward bio-energy cleansing. Emphasizes warm, easily digestible, iron-rich comfort meals.</li>
+        <li><strong>Days (Duration + 1) to (CycleLength/2 - 2) (e.g., Days 6–12):</strong> <em>Follicular Phase (Kapha Building)</em>. Anabolic estrogen rise, tissue regeneration (Rasa/Rakta Dhatu), seed cycling.</li>
+        <li><strong>Days (CycleLength/2 - 1) to (CycleLength/2 + 2) (e.g., Days 13–16):</strong> <em>Ovulatory Phase (Pitta Peak)</em>. High metabolic fire (Tejas), peak vitality; requires cooling, hydrating, nutrient-dense nutrition.</li>
+        <li><strong>Days (CycleLength/2 + 3) to CycleLength (e.g., Days 17–28):</strong> <em>Luteal Phase (Vata-Pitta Transition)</em>. Progesterone phase; prevents premenstrual bloating, cravings, and cramps with magnesium, B6, and grounding herbs.</li>
+      </ul>
+    </li>
+    <li><strong>Dedicated Stage-Wise Reproductive Health Protocols:</strong>
+      <ul>
+        <li><strong>PCOS Protocol:</strong> Clears micro-channel blockages (<em>Srotorodha</em>) using low-GI grains (Jav, Millets), Kanchanar Guggulu, and Spearmint tea to balance androgens.</li>
+        <li><strong>Garbhini Paricharya (Pregnancy Trimesters 1, 2, 3):</strong> Trimester 1 calms nausea and supports cellular folate; Trimester 2 emphasizes blood building (Rakta) and bone minerals (Asthi) via A2 Ghee and Ragi; Trimester 3 prepares the pelvic floor and calms Apana Vayu.</li>
+        <li><strong>Sutika Paricharya (Postpartum Recovery):</strong> Rekindles depleted Agni, supports healthy lactation (<em>Stanyajanana</em>) with Shatavari and Methi laddoos, and grounds Vata through gentle Abhyanga and abdominal binding (<em>Udaraveshtana</em>).</li>
+        <li><strong>Menopause Protocol:</strong> Replenishes drying Vata, supports bone density (Asthi Dhatu) with white sesame seeds and Praval Pishti (coral calcium), and eases hot flashes.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>B. Key Cycle Estimation Algorithms</h3>
+  <div class="code-box">long daysDiff = ChronoUnit.DAYS.between(profile.getLastPeriodDate(), LocalDate.now());
+int cycleLen = profile.getCycleLengthDays() > 0 ? profile.getCycleLengthDays() : 28;
+int duration = profile.getPeriodDurationDays() > 0 ? profile.getPeriodDurationDays() : 5;
+
+int currentCycleDay = (int) (daysDiff % cycleLen) + 1;
+LocalDate estimatedNextPeriod = profile.getLastPeriodDate().plusDays(((daysDiff / cycleLen) + 1) * cycleLen);
+
+if (currentCycleDay <= duration) {
+    phase = "Menstrual Phase (Apana Vayu Active)";
+} else if (currentCycleDay <= (cycleLen / 2 - 2)) {
+    phase = "Follicular Phase (Kapha Building)";
+} else if (currentCycleDay <= (cycleLen / 2 + 2)) {
+    phase = "Ovulatory Phase (Pitta Peak)";
+} else {
+    phase = "Luteal Phase (Vata-Pitta Transition)";
+}</div>
+
+  <h3>C. Ayurvedic Principles of Female Vitality Across Life Stages</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Life / Cycle Phase</th>
+        <th>Classical Ayurvedic Concept</th>
+        <th>Predominant Dosha</th>
+        <th>Clinical Nutrition &amp; Herb Recommendations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Menstruation</strong></td>
+        <td>Rajaswala Paricharya</td>
+        <td>Apana Vata</td>
+        <td>Warm Moong Khichdi, Ajwain-Ginger water, Black raisins, Ashoka (Saraca asoca), Dashamula tea.</td>
+      </tr>
+      <tr>
+        <td><strong>Follicular / Proliferative</strong></td>
+        <td>Ritumati Kala</td>
+        <td>Kapha (Saumya)</td>
+        <td>Sprouted pulses, Pumpkin &amp; Flaxseeds, Iron-rich spinach cooked in ghee, Shatavari kalpa.</td>
+      </tr>
+      <tr>
+        <td><strong>Ovulatory</strong></td>
+        <td>Ritu Vyatita / Garbhadhana</td>
+        <td>Pitta (Tejas)</td>
+        <td>Tender coconut water, Fresh sweet pomegranate, Soaked almonds, cooling herbal infusions.</td>
+      </tr>
+      <tr>
+        <td><strong>Luteal / Premenstrual</strong></td>
+        <td>Rajaswala Poorva Kala</td>
+        <td>Vata-Pitta</td>
+        <td>Sesame &amp; sunflower seeds, Steamed root veggies, Phool Makhana, Chamomile, warm milk with nutmeg.</td>
+      </tr>
+      <tr>
+        <td><strong>Pregnancy (Garbhini)</strong></td>
+        <td>Garbhini Paricharya</td>
+        <td>Tridoshic Harmony / Ojas</td>
+        <td>Cardamom milk, A2 cow ghee, Ragi porridge, Soaked walnuts, dates, gentle prenatal walking.</td>
+      </tr>
+      <tr>
+        <td><strong>Postpartum (Sutika)</strong></td>
+        <td>Sutika Paricharya</td>
+        <td>High Vata / Low Agni</td>
+        <td>Gond-Methi laddoos, Jeera-Fennel water, Dashamularishta, Restorative 40-day care.</td>
+      </tr>
+      <tr>
+        <td><strong>Menopause (Rajonivritta)</strong></td>
+        <td>Vata Vriddhi Sandhi</td>
+        <td>Vata Dominance</td>
+        <td>White sesame seeds (calcium), Ashwagandha, Golden flaxseed powder, Praval Pishti, Abhyanga.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================== -->
+<!-- MODULE 5: SECURITY ARCHITECTURE -->
+<!-- ========================================== -->
+<div class="section-block">
+  <h2>5. Security Architecture &amp; Protection Mechanisms</h2>
+
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="pillar-title">1. Authentication Security</div>
+      <div class="pillar-content">
+        Stateless JWT (JSON Web Tokens) signed with HMAC-SHA256, 24-hour expiration token claims, and BCrypt password encryption with adaptive work factor.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">2. Transport &amp; Network Defense</div>
+      <div class="pillar-content">
+        Granular CORS configuration restricted to authorized client domains; CSRF disabled for stateless REST APIs; clickjacking defense via Frame-Options.
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-title">3. Data &amp; Access Protection</div>
+      <div class="pillar-content">
+        SQL Injection prevention via Spring Data JPA Hibernate parameterized queries; XSS defense via React JSX auto-escaping; brute force OTP protection.
+      </div>
+    </div>
+  </div>
+
+  <h3>A. Architectural Security Flow</h3>
+  <p>
+    The security architecture follows modern defense-in-depth principles implemented across the Spring Boot 3 filter chain and database persistence layers:
+  </p>
+
+  <div class="code-box">HTTP Request
+      │
+      ▼
+┌──────────────────────────────────────────────────────────┐
+│ 1. CorsFilter (Validates Allowed Origins, Headers, HTTP) │
+└─────────────────────────────┬────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────┐
+│ 2. SecurityFilterChain (CSRF Disabled, Stateless Policy) │
+└─────────────────────────────┬────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────┐
+│ 3. JwtAuthenticationFilter                               │
+│    - Extracts "Bearer &lt;token&gt;" from Authorization Header │
+│    - Verifies HMAC-SHA256 Signature with Secret Key      │
+│    - Checks Claims & Expiry Timestamp                    │
+│    - Loads UserDetails and sets SecurityContextHolder    │
+└─────────────────────────────┬────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────┐
+│ 4. Controller &amp; Service Logic Layer                      │
+│    - Authenticated Principal verification                │
+│    - User-specific isolation (user_id match enforcement) │
+└──────────────────────────────────────────────────────────┘</div>
+
+  <h3>B. Comprehensive Security Components Used</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Security Layer</th>
+        <th>Technology / Component Used</th>
+        <th>Exact Implementation Details</th>
+        <th>Threat Mitigated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Credential Hashing</strong></td>
+        <td><code>BCryptPasswordEncoder</code></td>
+        <td>Uses adaptive multi-round hashing with automated cryptographic salt generation. Applied to both user login passwords and temporary email OTPs.</td>
+        <td>Credential leaks, Rainbow Table attacks, brute-force dictionary attacks.</td>
+      </tr>
+      <tr>
+        <td><strong>Session &amp; Token Handling</strong></td>
+        <td><code>jjwt-api 0.11.5</code> (HS256)</td>
+        <td>Stateless authorization. Tokens are signed with a 256-bit cryptographic secret key (<code>Keys.hmacShaKeyFor</code>) with a strict 24-hour expiration (86,400,000 ms).</td>
+        <td>Session hijacking, horizontal privilege escalation, server memory bloat.</td>
+      </tr>
+      <tr>
+        <td><strong>Request Filtering</strong></td>
+        <td><code>JwtAuthenticationFilter</code></td>
+        <td>Extends <code>OncePerRequestFilter</code>. Intercepts incoming requests, parses <code>Authorization: Bearer &lt;jwt&gt;</code>, checks validity, and sets <code>UsernamePasswordAuthenticationToken</code> in <code>SecurityContextHolder</code>.</td>
+        <td>Unauthenticated resource tampering, token spoofing.</td>
+      </tr>
+      <tr>
+        <td><strong>Cross-Origin Security</strong></td>
+        <td><code>CorsConfigurationSource</code></td>
+        <td>Explicitly allows trusted origins (<code>http://localhost:5173</code>, <code>http://localhost:3000</code>), requires credentials, and defines whitelisted HTTP verbs and headers.</td>
+        <td>Cross-Origin data theft, unauthorized external cross-domain queries.</td>
+      </tr>
+      <tr>
+        <td><strong>Database Query Safety</strong></td>
+        <td>Spring Data JPA &amp; Hibernate</td>
+        <td>All queries utilize parameterized prepared statements and ORM criteria mapping. Direct string concatenation for SQL commands is strictly avoided.</td>
+        <td>SQL Injection (SQLi) attacks.</td>
+      </tr>
+      <tr>
+        <td><strong>OTP Abuse Defense</strong></td>
+        <td><code>EmailOtpService</code></td>
+        <td>(1) 30-second cooldown rate limit between OTP requests.<br>(2) Strict 5-minute expiry.<br>(3) Maximum 5 failed verification attempts before permanent OTP invalidation.<br>(4) Email masking in responses (e.g. <code>sn***@gmail.com</code>).</td>
+        <td>OTP Brute Force, SMS/Email spamming, credential enumeration.</td>
+      </tr>
+      <tr>
+        <td><strong>Clickjacking Protection</strong></td>
+        <td>Spring Security Headers</td>
+        <td>Frame options are controlled via <code>headers.frameOptions(frame -&gt; frame.disable())</code> for local H2 console access while maintaining route-level safety.</td>
+        <td>UI Redress / Clickjacking exploits.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>C. Code Implementation Snippet (Spring Security 6 Configuration)</h3>
+  <div class="code-box">@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .csrf(csrf -> csrf.disable()) // Stateless JWT architecture eliminates CSRF vulnerabilities
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers(
+                "/", "/api/v1/auth/**", "/h2-console/**",
+                "/api/v1/dosha/**", "/api/v1/diet/**", "/api/v1/womens-health/**"
+            ).permitAll()
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}</div>
+
+  <div class="callout">
+    <div class="callout-title">Summary of Security Posture</div>
+    AyurWell couples modern cloud security engineering (stateless tokens, BCrypt salting, parameterized ORM) with ethical health data confidentiality, ensuring sensitive reproductive tracking and biological dosha data remain strictly isolated to the authenticated user account.
+  </div>
+</div>
+
+</body>
+</html>

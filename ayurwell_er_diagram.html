@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AyurWell - Comprehensive Database Entity-Relationship Diagram (ERD)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #080c15;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #111a2e;
+      border-bottom: 1px solid #1e293b;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    .title-group h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge {
+      font-size: 0.75rem;
+      background: #065f46;
+      color: #34d399;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    button {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    button:hover {
+      background: #334155;
+      color: #fff;
+    }
+    button.primary {
+      background: #0284c7;
+      border-color: #0369a1;
+      color: #fff;
+    }
+    button.primary:hover {
+      background: #0369a1;
+    }
+    #viewport {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 40px;
+      cursor: grab;
+      background-color: #080c15;
+    }
+    #viewport:active {
+      cursor: grabbing;
+    }
+    #diagram-container {
+      transform-origin: top left;
+      transition: transform 0.1s ease-out;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    svg {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-group">
+      <h1>
+        🗄️ AyurWell Entity-Relationship Diagram (ERD)
+        <span class="badge">PostgreSQL / H2 DDL</span>
+        <span class="badge" style="background:#1e3a8a; color:#60a5fa;">15 Tables • Crow’s Foot Notation</span>
+      </h1>
+    </div>
+    <div class="controls">
+      <button onclick="zoomOut()">🔍 - Zoom Out</button>
+      <button onclick="resetZoom()">100% Reset</button>
+      <button onclick="zoomIn()">🔍 + Zoom In</button>
+      <button onclick="fitScreen()">Fit Screen</button>
+      <button class="primary" onclick="downloadSVG()">💾 Download SVG</button>
+      <button class="primary" style="background:#059669; border-color:#047857;" onclick="downloadPNG()">🖼️ Save as PNG</button>
+    </div>
+  </header>
+
+  <div id="viewport">
+    <div id="diagram-container">
+      <?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3600 2420" width="3600" height="2420" style="background-color: #080C15; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Background Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.035)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Card Shadow -->
+    <filter id="card-shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Gradients for Table Headers -->
+    <linearGradient id="grad-auth" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+
+    <linearGradient id="grad-dosha" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <linearGradient id="grad-diet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+
+    <linearGradient id="grad-food" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D9488" />
+      <stop offset="100%" stop-color="#0F766E" />
+    </linearGradient>
+
+    <linearGradient id="grad-womens" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DB2777" />
+      <stop offset="100%" stop-color="#BE185D" />
+    </linearGradient>
+
+    <linearGradient id="grad-tracking" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5" />
+      <stop offset="100%" stop-color="#4338CA" />
+    </linearGradient>
+
+    <linearGradient id="grad-header-bar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="35%" stop-color="#0284C7" />
+      <stop offset="70%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#DB2777" />
+    </linearGradient>
+
+    <!-- Crow's Foot Markers -->
+    <!-- Crow's Foot Many Marker -->
+    <marker id="marker-crows-foot" viewBox="0 0 20 20" refX="18" refY="10" markerWidth="14" markerHeight="14" orient="auto-start-reverse">
+      <path d="M 0 3 L 18 10 L 0 17 M 18 2 L 18 18" fill="none" stroke="#FBBF24" stroke-width="2.2" stroke-linecap="round"/>
+    </marker>
+
+    <!-- One Mandatory Marker (||) -->
+    <marker id="marker-one" viewBox="0 0 16 16" refX="14" refY="8" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M 6 2 L 6 14 M 12 2 L 12 14" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round"/>
+    </marker>
+
+    <!-- One Optional Marker (o|) -->
+    <marker id="marker-one-optional" viewBox="0 0 20 20" refX="18" refY="10" markerWidth="14" markerHeight="14" orient="auto-start-reverse">
+      <circle cx="6" cy="10" r="4.5" fill="#0B1120" stroke="#F472B6" stroke-width="2" />
+      <path d="M 16 3 L 16 17" fill="none" stroke="#F472B6" stroke-width="2.2" stroke-linecap="round"/>
+    </marker>
+  </defs>
+
+  <!-- Grid Layer -->
+  <rect width="3600" height="2420" fill="url(#grid)" />
+
+  <!-- ================= TOP MAIN HEADER ================= -->
+  <g transform="translate(50, 20)">
+    <rect x="0" y="0" width="3500" height="64" rx="12" fill="#131D31" stroke="#2A3853" stroke-width="1.8"/>
+    <rect x="0" y="60" width="3500" height="4" fill="url(#grad-header-bar)" rx="2"/>
+    
+    <text x="28" y="40" fill="#F8FAFC" font-size="26" font-weight="900" letter-spacing="1.2">🌿 AYURWELL HEALTHCARE PLATFORM</text>
+    <text x="560" y="40" fill="#64748B" font-size="18" font-weight="400">|</text>
+    <text x="580" y="40" fill="#38BDF8" font-size="18" font-weight="700">ENTITY-RELATIONSHIP DIAGRAM (ERD) — RELATIONAL DATABASE SCHEMA</text>
+    
+    <!-- Badges on right side -->
+    <rect x="2840" y="17" width="160" height="30" rx="6" fill="#064E3B" stroke="#059669" stroke-width="1.2"/>
+    <text x="2920" y="37" fill="#34D399" font-size="13" font-weight="800" text-anchor="middle">POSTGRESQL / H2</text>
+    
+    <rect x="3015" y="17" width="155" height="30" rx="6" fill="#1E3A8A" stroke="#2563EB" stroke-width="1.2"/>
+    <text x="3093" y="37" fill="#60A5FA" font-size="13" font-weight="800" text-anchor="middle">CROW’S FOOT NOTATION</text>
+
+    <rect x="3185" y="17" width="165" height="30" rx="6" fill="#701A75" stroke="#C026D3" stroke-width="1.2"/>
+    <text x="3268" y="37" fill="#F472B6" font-size="13" font-weight="800" text-anchor="middle">15 RELATIONAL TABLES</text>
+
+    <rect x="3365" y="17" width="115" height="30" rx="6" fill="#312E81" stroke="#4F46E5" stroke-width="1.2"/>
+    <text x="3423" y="37" fill="#A5B4FC" font-size="13" font-weight="800" text-anchor="middle">ACID COMPLIANT</text>
+  </g>
+
+  <!-- Domain: AUTH &amp; IDENTITY RELATIONAL DOMAIN -->
+  <g>
+    <rect x="50" y="105" width="790" height="745" rx="16" fill="rgba(2, 132, 199, 0.03)" stroke="rgba(2, 132, 199, 0.3)" stroke-width="2" stroke-dasharray="8,5" />
+    <rect x="70" y="90" width="366" height="30" rx="7" fill="#1E293B" stroke="rgba(2, 132, 199, 0.3)" stroke-width="1.6" />
+    <text x="86" y="111" fill="#F1F5F9" font-size="13" font-weight="800" letter-spacing="1">AUTH &amp; IDENTITY RELATIONAL DOMAIN</text>
+    <text x="78" y="145" fill="#64748B" font-size="12.5" font-weight="500">RBAC Users, Profile Demographics &amp; OTP Verification Logs</text>
+  </g>
+
+  <!-- Domain: AYURVEDIC ASSESSMENT SCHEMA -->
+  <g>
+    <rect x="50" y="865" width="790" height="500" rx="16" fill="rgba(5, 150, 105, 0.03)" stroke="rgba(5, 150, 105, 0.3)" stroke-width="2" stroke-dasharray="8,5" />
+    <rect x="70" y="850" width="306" height="30" rx="7" fill="#1E293B" stroke="rgba(5, 150, 105, 0.3)" stroke-width="1.6" />
+    <text x="86" y="871" fill="#F1F5F9" font-size="13" font-weight="800" letter-spacing="1">AYURVEDIC ASSESSMENT SCHEMA</text>
+    <text x="78" y="905" fill="#64748B" font-size="12.5" font-weight="500">Diagnostic Prakriti Scores &amp; Dosha Constitution Logs</text>
+  </g>
+
+  <!-- Domain: DINACHARYA &amp; LIFESTYLE LOGS -->
+  <g>
+    <rect x="50" y="1380" width="790" height="980" rx="16" fill="rgba(79, 70, 229, 0.03)" stroke="rgba(79, 70, 229, 0.3)" stroke-width="2" stroke-dasharray="8,5" />
+    <rect x="70" y="1365" width="306" height="30" rx="7" fill="#1E293B" stroke="rgba(79, 70, 229, 0.3)" stroke-width="1.6" />
+    <text x="86" y="1386" fill="#F1F5F9" font-size="13" font-weight="800" letter-spacing="1">DINACHARYA &amp; LIFESTYLE LOGS</text>
+    <text x="78" y="1420" fill="#64748B" font-size="12.5" font-weight="500">Daily Energy, Digestion Fire Logs &amp; Timed Reminders</text>
+  </g>
+
+  <!-- Domain: DIET PLANNING &amp; AYURVEDIC NUTRITION ENGINE -->
+  <g>
+    <rect x="870" y="105" width="1340" height="1260" rx="16" fill="rgba(217, 119, 6, 0.03)" stroke="rgba(217, 119, 6, 0.3)" stroke-width="2" stroke-dasharray="8,5" />
+    <rect x="890" y="90" width="456" height="30" rx="7" fill="#1E293B" stroke="rgba(217, 119, 6, 0.3)" stroke-width="1.6" />
+    <text x="906" y="111" fill="#F1F5F9" font-size="13" font-weight="800" letter-spacing="1">DIET PLANNING &amp; AYURVEDIC NUTRITION ENGINE</text>
+    <text x="898" y="145" fill="#64748B" font-size="12.5" font-weight="500">Meal Plans, Recipes, Food Items &amp; Viruddha Incompatibility Matrix</text>
+  </g>
+
+  <!-- Domain: BIOCHEMICAL FOOD SCIENCE &amp; DRAVYAGUNA DATABASE -->
+  <g>
+    <rect x="2230" y="105" width="1320" height="720" rx="16" fill="rgba(13, 148, 136, 0.03)" stroke="rgba(13, 148, 136, 0.3)" stroke-width="2" stroke-dasharray="8,5" />
+    <rect x="2250" y="90" width="496" height="30" rx="7" fill="#1E293B" stroke="rgba(13, 148, 136, 0.3)" stroke-width="1.6" />
+    <text x="2266" y="111" fill="#F1F5F9" font-size="13" font-weight="800" letter-spacing="1">BIOCHEMICAL FOOD SCIENCE &amp; DRAVYAGUNA DATABASE</text>
+    <text x="2258" y="145" fill="#64748B" font-size="12.5" font-weight="500">ICMR-NIN IFCT 2017 Dataset &amp; Classical Ayurvedic Energetics (1:1 Join)</text>
+  </g>
+
+  <!-- Domain: WOMEN’S HEALTH &amp; STREE SWASTHYA TABLES -->
+  <g>
+    <rect x="870" y="1380" width="1340" height="980" rx="16" fill="rgba(219, 39, 119, 0.03)" stroke="rgba(219, 39, 119, 0.3)" stroke-width="2" stroke-dasharray="8,5" />
+    <rect x="890" y="1365" width="416" height="30" rx="7" fill="#1E293B" stroke="rgba(219, 39, 119, 0.3)" stroke-width="1.6" />
+    <text x="906" y="1386" fill="#F1F5F9" font-size="13" font-weight="800" letter-spacing="1">WOMEN’S HEALTH &amp; STREE SWASTHYA TABLES</text>
+    <text x="898" y="1420" fill="#64748B" font-size="12.5" font-weight="500">Menstrual Cycle, Pregnancy Trimester, Menopause &amp; Symptom Tracking</text>
+  </g>
+
+  <!-- Domain: DATABASE SPECIFICATIONS &amp; REFERENTIAL INTEGRITY -->
+  <g>
+    <rect x="2230" y="845" width="1320" height="1515" rx="16" fill="rgba(148, 163, 184, 0.03)" stroke="rgba(148, 163, 184, 0.25)" stroke-width="2" stroke-dasharray="8,5" />
+    <rect x="2250" y="830" width="506" height="30" rx="7" fill="#1E293B" stroke="rgba(148, 163, 184, 0.25)" stroke-width="1.6" />
+    <text x="2266" y="851" fill="#F1F5F9" font-size="13" font-weight="800" letter-spacing="1">DATABASE SPECIFICATIONS &amp; REFERENTIAL INTEGRITY</text>
+    <text x="2258" y="885" fill="#64748B" font-size="12.5" font-weight="500">PostgreSQL Relational Schema Matrix, Foreign Keys &amp; Crow’s Foot Notation</text>
+  </g>
+
+  <!-- Rel: users -> user_profiles -->
+  <g>
+    <path d="M 440 440 L 410 440" fill="none" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-one)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="448" y="420" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="464" y="434" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="372" y="420" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="388" y="434" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="221.70000000000002" y="418" width="376.59999999999997" height="22" rx="5" fill="#0F172A" stroke="#0284C7" stroke-width="1.2" opacity="0.95"/>
+    <text x="410" y="433" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">user_profiles.user_id = users.id (UNIQUE)</text>
+  </g>
+
+  <!-- Rel: users -> dosha_assessments -->
+  <g>
+    <path d="M 630 460 L 630 880" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-crows-foot)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="638" y="440" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="654" y="454" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="592" y="860" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="608" y="874" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="463.20000000000005" y="858" width="333.59999999999997" height="22" rx="5" fill="#0F172A" stroke="#059669" stroke-width="1.2" opacity="0.95"/>
+    <text x="630" y="873" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">dosha_assessments.user_id = users.id</text>
+  </g>
+
+  <!-- Rel: users -> meal_plans -->
+  <g>
+    <path d="M 820 280 L 900 280" fill="none" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-crows-foot)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="828" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="844" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="862" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="878" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="763.3" y="258" width="273.4" height="22" rx="5" fill="#0F172A" stroke="#D97706" stroke-width="1.2" opacity="0.95"/>
+    <text x="900" y="273" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">meal_plans.user_id = users.id</text>
+  </g>
+
+  <!-- Rel: meal_plans -> meal_plan_items -->
+  <g>
+    <path d="M 1290 280 L 1360 280" fill="none" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-crows-foot)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="1298" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1314" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="1322" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1338" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1..*</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="1115.8" y="258" width="488.4" height="22" rx="5" fill="#0F172A" stroke="#D97706" stroke-width="1.2" opacity="0.95"/>
+    <text x="1360" y="273" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">meal_plan_items.meal_plan_id = meal_plans.id (CASCADE)</text>
+  </g>
+
+  <!-- Rel: meal_plan_items -> recipes -->
+  <g>
+    <path d="M 1550 460 L 1550 550" fill="none" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-crows-foot)" marker-end="url(#marker-one-optional)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="1558" y="440" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1574" y="454" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <rect x="1512" y="530" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1528" y="544" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..1</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="1374.6" y="528" width="350.8" height="22" rx="5" fill="#0F172A" stroke="#D97706" stroke-width="1.2" opacity="0.95"/>
+    <text x="1550" y="543" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">meal_plan_items.recipe_id = recipes.id</text>
+  </g>
+
+  <!-- Rel: meal_plan_items -> food_items -->
+  <g>
+    <path d="M 1740 280 L 1810 280" fill="none" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-crows-foot)" marker-end="url(#marker-one-optional)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="1748" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1764" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <rect x="1772" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1788" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..1</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="1608.8" y="258" width="402.4" height="22" rx="5" fill="#0F172A" stroke="#D97706" stroke-width="1.2" opacity="0.95"/>
+    <text x="1810" y="273" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">meal_plan_items.food_item_id = food_items.id</text>
+  </g>
+
+  <!-- Rel: viruddha_combinations -> food_items -->
+  <g>
+    <path d="M 2000 650 L 2000 590" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-crows-foot)" marker-end="url(#marker-one)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="2008" y="630" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="2024" y="644" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <rect x="1962" y="570" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1978" y="584" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="1828.9" y="568" width="342.2" height="22" rx="5" fill="#0F172A" stroke="#EF4444" stroke-width="1.2" opacity="0.95"/>
+    <text x="2000" y="583" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">food_a_id, food_b_id -&gt; food_items.id</text>
+  </g>
+
+  <!-- Rel: raw_food_composition -> ayurvedic_food_profiles -->
+  <g>
+    <path d="M 2670 280 L 2740 280" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-one)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="2678" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="2694" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="2702" y="260" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="2718" y="274" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="2427" y="258" width="626" height="22" rx="5" fill="#0F172A" stroke="#0D9488" stroke-width="1.2" opacity="0.95"/>
+    <text x="2740" y="273" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">ayurvedic_food_profiles.raw_food_id = raw_food_composition.id (UNIQUE)</text>
+  </g>
+
+  <!-- Rel: users -> daily_health_logs -->
+  <g>
+    <path d="M 440 460 L 425 460 L 425 860 L 425 1410 L 250 1410 L 250 1470" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-crows-foot)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="448" y="440" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="464" y="454" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="212" y="1450" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="228" y="1464" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="258.20000000000005" y="1388" width="333.59999999999997" height="22" rx="5" fill="#0F172A" stroke="#4F46E5" stroke-width="1.2" opacity="0.95"/>
+    <text x="425" y="1403" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">daily_health_logs.user_id = users.id</text>
+  </g>
+
+  <!-- Rel: users -> reminders -->
+  <g>
+    <path d="M 740 460 L 740 860 L 740 1440 L 640 1440 L 640 1470" fill="none" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-crows-foot)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="748" y="440" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="764" y="454" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="602" y="1450" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="618" y="1464" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="607.6" y="1418" width="264.79999999999995" height="22" rx="5" fill="#0F172A" stroke="#4F46E5" stroke-width="1.2" opacity="0.95"/>
+    <text x="740" y="1433" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">reminders.user_id = users.id</text>
+  </g>
+
+  <!-- Rel: users -> womens_health_profiles -->
+  <g>
+    <path d="M 820 440 L 855 440 L 855 1540 L 900 1540" fill="none" stroke="#DB2777" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-one-optional)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="828" y="420" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="844" y="434" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="862" y="1520" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="878" y="1534" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..1</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="628" y="1518" width="454" height="22" rx="5" fill="#0F172A" stroke="#DB2777" stroke-width="1.2" opacity="0.95"/>
+    <text x="855" y="1533" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">womens_health_profiles.user_id = users.id (UNIQUE)</text>
+  </g>
+
+  <!-- Rel: users -> womens_health_logs -->
+  <g>
+    <path d="M 820 460 L 875 460 L 875 1345 L 1550 1345 L 1550 1470" fill="none" stroke="#DB2777" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#marker-one)" marker-end="url(#marker-crows-foot)" opacity="0.88"/>
+    
+    <!-- Cardinality Badges -->
+    <rect x="828" y="440" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="844" y="454" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">1</text>
+
+    <rect x="1512" y="1450" width="32" height="20" rx="4" fill="#0B1120" stroke="#334155" stroke-width="1.2" opacity="0.95"/>
+    <text x="1528" y="1464" fill="#F8FAFC" font-size="11.5" font-weight="800" text-anchor="middle">0..*</text>
+
+    <!-- Relationship Foreign Key Annotation Label -->
+    <rect x="703.9" y="1323" width="342.2" height="22" rx="5" fill="#0F172A" stroke="#DB2777" stroke-width="1.2" opacity="0.95"/>
+    <text x="875" y="1338" fill="#E2E8F0" font-size="11" font-weight="700" text-anchor="middle">womens_health_logs.user_id = users.id</text>
+  </g>
+
+  <!-- Table: users -->
+  <g id="table-users" transform="translate(440, 170)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="380" height="266" rx="12" fill="#0F172A" stroke="#0284C7" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 368 0 Q 380 0 380 12 L 380 58 L 0 58 Z" fill="url(#grad-auth)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">users</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Core Identity &amp; Security Credentials</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="380" y2="58" stroke="#0284C7" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="324" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">email</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      <rect x="300" y="10" width="48" height="18" rx="4" fill="#7C3AED" opacity="0.95"/><text x="324" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">UK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">password</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">full_name</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">role</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(50)</tspan><tspan fill="#64748B" font-size="10"> DEFAULT &apos;ROLE_USER&apos;</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">active</tspan> : <tspan fill="#38BDF8" font-weight="600">BOOLEAN</tspan><tspan fill="#64748B" font-size="10"> DEFAULT TRUE</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">email_verified</tspan> : <tspan fill="#38BDF8" font-weight="600">BOOLEAN</tspan><tspan fill="#64748B" font-size="10"> DEFAULT FALSE</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">created_at</tspan> : <tspan fill="#38BDF8" font-weight="600">TIMESTAMP</tspan><tspan fill="#64748B" font-size="10"> DEFAULT NOW()</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: user_profiles -->
+  <g id="table-user_profiles" transform="translate(70, 410)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="340" height="386" rx="12" fill="#0F172A" stroke="#0284C7" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 328 0 Q 340 0 340 12 L 340 58 L 0 58 Z" fill="url(#grad-auth)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">user_profiles</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Physical &amp; Economic Ayurvedic Profile</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="340" y2="58" stroke="#0284C7" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="260" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="284" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">user_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="240" y="10" width="68" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="274" y="23" fill="#FFFFFF" font-size="9.5" font-weight="900" text-anchor="middle">FK, UK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">age</tspan> : <tspan fill="#38BDF8" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">gender</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">weight_kg</tspan> : <tspan fill="#38BDF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">height_cm</tspan> : <tspan fill="#38BDF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">activity_level</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">budget_per_day_inr</tspan> : <tspan fill="#38BDF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">primary_health_goal</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">primary_dosha</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="240" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">digestive_fire_agni</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="264" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">target_disease_condition</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="288" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">profile_completed</tspan> : <tspan fill="#38BDF8" font-weight="600">BOOLEAN</tspan><tspan fill="#64748B" font-size="10"> DEFAULT FALSE</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: email_otps -->
+  <g id="table-email_otps" transform="translate(70, 170)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="340" height="242" rx="12" fill="#0F172A" stroke="#0284C7" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 328 0 Q 340 0 340 12 L 340 58 L 0 58 Z" fill="url(#grad-auth)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">email_otps</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Two-Factor Registration &amp; Reset OTPs</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="340" y2="58" stroke="#0284C7" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="260" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="284" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">email</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      <rect x="260" y="10" width="48" height="18" rx="4" fill="#0D9488" opacity="0.95"/><text x="284" y="23" fill="#FFFFFF" font-size="9.5" font-weight="900" text-anchor="middle">INDEX</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">otp_hash</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">expires_at</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#38BDF8" font-weight="600">TIMESTAMP</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">verified</tspan> : <tspan fill="#38BDF8" font-weight="600">BOOLEAN</tspan><tspan fill="#64748B" font-size="10"> DEFAULT FALSE</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">attempts</tspan> : <tspan fill="#38BDF8" font-weight="600">INT</tspan><tspan fill="#64748B" font-size="10"> DEFAULT 0</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">created_at</tspan> : <tspan fill="#38BDF8" font-weight="600">TIMESTAMP</tspan><tspan fill="#64748B" font-size="10"> DEFAULT NOW()</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: dosha_assessments -->
+  <g id="table-dosha_assessments" transform="translate(440, 880)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="380" height="266" rx="12" fill="#0F172A" stroke="#059669" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 368 0 Q 380 0 380 12 L 380 58 L 0 58 Z" fill="url(#grad-dosha)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">dosha_assessments</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Vedic Prakriti Diagnostic Scoring</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="380" y2="58" stroke="#059669" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#34D399" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="324" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">user_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#34D399" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="10" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="324" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">vata_score</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#34D399" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">pitta_score</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#34D399" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">kapha_score</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#34D399" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">primary_prakriti</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#34D399" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">secondary_prakriti</tspan> : <tspan fill="#34D399" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">assessed_at</tspan> : <tspan fill="#34D399" font-weight="600">TIMESTAMP</tspan><tspan fill="#64748B" font-size="10"> DEFAULT NOW()</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: daily_health_logs -->
+  <g id="table-daily_health_logs" transform="translate(70, 1470)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="360" height="338" rx="12" fill="#0F172A" stroke="#4F46E5" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 348 0 Q 360 0 360 12 L 360 58 L 0 58 Z" fill="url(#grad-tracking)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">daily_health_logs</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Daily Agni, Energy &amp; Intake Tracker</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="360" y2="58" stroke="#4F46E5" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="280" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="304" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">user_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="280" y="10" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="304" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">log_date</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">DATE</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">calories_consumed</tspan> : <tspan fill="#818CF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">water_intake_liters</tspan> : <tspan fill="#818CF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">energy_level_rating</tspan> : <tspan fill="#818CF8" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">digestion_quality_rating</tspan> : <tspan fill="#818CF8" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">ayur_score_today</tspan> : <tspan fill="#818CF8" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">iron_intake_mg</tspan> : <tspan fill="#818CF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">calcium_intake_mg</tspan> : <tspan fill="#818CF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="240" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">protein_intake_grams</tspan> : <tspan fill="#818CF8" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: reminders -->
+  <g id="table-reminders" transform="translate(460, 1470)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="360" height="242" rx="12" fill="#0F172A" stroke="#4F46E5" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 348 0 Q 360 0 360 12 L 360 58 L 0 58 Z" fill="url(#grad-tracking)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">reminders</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Dinacharya Lifestyle &amp; Meal Notifications</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="360" y2="58" stroke="#4F46E5" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="280" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="304" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">user_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="280" y="10" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="304" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">title</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">reminder_time</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">TIME</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">category</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#818CF8" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">description</tspan> : <tspan fill="#818CF8" font-weight="600">VARCHAR(500)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">enabled</tspan> : <tspan fill="#818CF8" font-weight="600">BOOLEAN</tspan><tspan fill="#64748B" font-size="10"> DEFAULT TRUE</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: meal_plans -->
+  <g id="table-meal_plans" transform="translate(900, 170)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="390" height="314" rx="12" fill="#0F172A" stroke="#D97706" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 378 0 Q 390 0 390 12 L 390 58 L 0 58 Z" fill="url(#grad-diet)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">meal_plans</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">7-Day Personalized Ayurvedic Regimen</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="390" y2="58" stroke="#D97706" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="310" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="334" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">user_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="310" y="10" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="334" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">plan_name</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">target_disease</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">season</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">womens_health_stage</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">total_daily_budget_inr</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">total_daily_calories</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">ayurvedic_nutrition_score</tspan> : <tspan fill="#FBBF24" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">created_at</tspan> : <tspan fill="#FBBF24" font-weight="600">TIMESTAMP</tspan><tspan fill="#64748B" font-size="10"> DEFAULT NOW()</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: meal_plan_items -->
+  <g id="table-meal_plan_items" transform="translate(1360, 170)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="380" height="290" rx="12" fill="#0F172A" stroke="#D97706" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 368 0 Q 380 0 380 12 L 380 58 L 0 58 Z" fill="url(#grad-diet)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">meal_plan_items</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Individual Dish &amp; Ingredient Instances</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="380" y2="58" stroke="#D97706" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="324" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">meal_plan_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="10" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="324" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">meal_type</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">recipe_id</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="58" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="324" y="71" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">food_item_id</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="82" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="324" y="95" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">day_of_week</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(20)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">portion_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">item_cost_inr</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">item_calories</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: recipes -->
+  <g id="table-recipes" transform="translate(1360, 550)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="380" height="458" rx="12" fill="#0F172A" stroke="#D97706" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 368 0 Q 380 0 380 12 L 380 58 L 0 58 Z" fill="url(#grad-diet)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">recipes</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Standard Ayurvedic Formulations &amp; Methods</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="380" y2="58" stroke="#D97706" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="324" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">title</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">description</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(1000)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">meal_type</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">suitable_dosha</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">suitable_season</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">prep_time_mins</tspan> : <tspan fill="#FBBF24" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">cost_per_serving_inr</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">calories</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">protein_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="240" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">carbs_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="264" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">fat_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="288" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">iron_mg</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="312" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">instructions</tspan> : <tspan fill="#FBBF24" font-weight="600">TEXT</tspan>
+      </text>
+      
+      <text x="0" y="336" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">suitable_disease_conditions</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="360" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">suitable_womens_health_stage</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: food_items -->
+  <g id="table-food_items" transform="translate(1810, 170)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="380" height="434" rx="12" fill="#0F172A" stroke="#D97706" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 368 0 Q 380 0 380 12 L 380 58 L 0 58 Z" fill="url(#grad-diet)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">food_items</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Raw Culinary Food Ingredients</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="380" y2="58" stroke="#D97706" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="324" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">name</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      <rect x="300" y="10" width="48" height="18" rx="4" fill="#7C3AED" opacity="0.95"/><text x="324" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">UK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">category</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">rasa</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">virya</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">vipaka</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">dosha_effect</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">calories</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">protein_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">carbs_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="240" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">fat_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="264" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">iron_mg</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="288" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">calcium_mg</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="312" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">fiber_grams</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="336" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">estimated_cost_inr</tspan> : <tspan fill="#FBBF24" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: viruddha_combinations -->
+  <g id="table-viruddha_combinations" transform="translate(1810, 650)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="380" height="218" rx="12" fill="#0F172A" stroke="#D97706" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 368 0 Q 380 0 380 12 L 380 58 L 0 58 Z" fill="url(#grad-diet)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">viruddha_combinations</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Classical Incompatible Food Pairing Rules</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="380" y2="58" stroke="#D97706" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="324" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">food_a_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="10" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="324" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">food_b_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="300" y="34" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="324" y="47" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">incompatibility_type</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">health_hazard_reason</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(500)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">antidote_recommendation</tspan> : <tspan fill="#FBBF24" font-weight="600">VARCHAR(500)</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: raw_food_composition -->
+  <g id="table-raw_food_composition" transform="translate(2260, 170)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="410" height="482" rx="12" fill="#0F172A" stroke="#0D9488" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 398 0 Q 410 0 410 12 L 410 58 L 0 58 Z" fill="url(#grad-food)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">raw_food_composition</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">ICMR-NIN IFCT 2017 Biochemical Database</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="410" y2="58" stroke="#0D9488" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#2DD4BF" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="330" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="354" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">food_code</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      <rect x="330" y="10" width="48" height="18" rx="4" fill="#7C3AED" opacity="0.95"/><text x="354" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">UK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">food_name</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">category</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">dataset_source</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">serving_size</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(50)</tspan><tspan fill="#64748B" font-size="10"> DEFAULT &apos;100g&apos;</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">energy_kcal</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">protein_grams</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">carbs_grams</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">fat_grams</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="240" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">fiber_grams</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="264" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">iron_mg</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="288" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">calcium_mg</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="312" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">vitamin_b12_mcg</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="336" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">vitamin_d_iu</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="360" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">folate_mcg</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="384" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">vitamin_c_mg</tspan> : <tspan fill="#2DD4BF" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: ayurvedic_food_profiles -->
+  <g id="table-ayurvedic_food_profiles" transform="translate(2740, 170)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="410" height="290" rx="12" fill="#0F172A" stroke="#0D9488" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 398 0 Q 410 0 410 12 L 410 58 L 0 58 Z" fill="url(#grad-food)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">ayurvedic_food_profiles</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Classical Dravyaguna Energetics</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="410" y2="58" stroke="#0D9488" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#2DD4BF" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="330" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="354" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">raw_food_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#2DD4BF" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="310" y="10" width="68" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="344" y="23" fill="#FFFFFF" font-size="9.5" font-weight="900" text-anchor="middle">FK, UK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">sanskrit_name</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">rasa</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(100)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">virya</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">vipaka</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">dosha_effect</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">suitable_ritu_seasons</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">classical_text_reference</tspan> : <tspan fill="#2DD4BF" font-weight="600">VARCHAR(255)</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: womens_health_profiles -->
+  <g id="table-womens_health_profiles" transform="translate(900, 1470)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="440" height="506" rx="12" fill="#0F172A" stroke="#DB2777" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 428 0 Q 440 0 440 12 L 440 58 L 0 58 Z" fill="url(#grad-womens)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">womens_health_profiles</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Stree Swasthya Life Stages &amp; Cycle Setup</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="440" y2="58" stroke="#DB2777" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#F472B6" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="360" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="384" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">user_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#F472B6" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="340" y="10" width="68" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="374" y="23" fill="#FFFFFF" font-size="9.5" font-weight="900" text-anchor="middle">FK, UK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">health_stage</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">pregnancy_trimester</tspan> : <tspan fill="#F472B6" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">cycle_phase</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">reported_symptoms</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(500)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">last_period_date</tspan> : <tspan fill="#F472B6" font-weight="600">DATE</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">cycle_length_days</tspan> : <tspan fill="#F472B6" font-weight="600">INT</tspan><tspan fill="#64748B" font-size="10"> DEFAULT 28</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">period_duration_days</tspan> : <tspan fill="#F472B6" font-weight="600">INT</tspan><tspan fill="#64748B" font-size="10"> DEFAULT 5</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">flow_level</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="240" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">cramps_severity</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="264" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">mood</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="288" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">energy_level</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="312" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">menopause_symptoms</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(500)</tspan>
+      </text>
+      
+      <text x="0" y="336" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">hot_flash_frequency</tspan> : <tspan fill="#F472B6" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="360" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">sleep_quality_rating</tspan> : <tspan fill="#F472B6" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="384" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">daily_iron_target_mg</tspan> : <tspan fill="#F472B6" font-weight="600">DOUBLE PRECISION</tspan><tspan fill="#64748B" font-size="10"> DEFAULT 18.0</tspan>
+      </text>
+      
+      <text x="0" y="408" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">daily_iron_intake_mg</tspan> : <tspan fill="#F472B6" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- Table: womens_health_logs -->
+  <g id="table-womens_health_logs" transform="translate(1390, 1470)" filter="url(#card-shadow)">
+    <!-- Base Table Container -->
+    <rect x="0" y="0" width="410" height="410" rx="12" fill="#0F172A" stroke="#DB2777" stroke-width="2" />
+
+    <!-- Table Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 398 0 Q 410 0 410 12 L 410 58 L 0 58 Z" fill="url(#grad-womens)" />
+    
+    <!-- Table Icon, Name & Comment -->
+    <text x="18" y="27" fill="#FFFFFF" font-size="16">🗄️</text>
+    <text x="44" y="28" fill="#FFFFFF" font-size="17" font-weight="900" letter-spacing="0.6">womens_health_logs</text>
+    <text x="18" y="48" fill="rgba(255,255,255,0.8)" font-size="10.5" font-family="'JetBrains Mono', 'Fira Code', monospace">Daily Menstrual &amp; Symptom Observational Log</text>
+
+    <!-- Header Divider Line -->
+    <line x1="0" y1="58" x2="410" y2="58" stroke="#DB2777" stroke-width="1.8" />
+
+    <!-- Columns Compartment -->
+    <g transform="translate(16, 78)">
+      <text x="0" y="0" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#F472B6" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="330" y="-14" width="48" height="18" rx="4" fill="#DC2626" opacity="0.95"/><text x="354" y="-1" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">PK</text>
+      <text x="0" y="24" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">user_id</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#F472B6" font-weight="600">BIGINT</tspan>
+      </text>
+      <rect x="330" y="10" width="48" height="18" rx="4" fill="#2563EB" opacity="0.95"/><text x="354" y="23" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">FK</text>
+      <text x="0" y="48" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">log_date</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#F472B6" font-weight="600">DATE</tspan>
+      </text>
+      
+      <text x="0" y="72" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">log_type</tspan><tspan fill="#EF4444" font-weight="bold"> *</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="96" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">flow_level</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="120" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">cramps_severity</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="144" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">mood</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="168" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">energy</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(50)</tspan>
+      </text>
+      
+      <text x="0" y="192" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">symptoms</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(500)</tspan>
+      </text>
+      
+      <text x="0" y="216" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">iron_intake_mg</tspan> : <tspan fill="#F472B6" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="240" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">water_intake_l</tspan> : <tspan fill="#F472B6" font-weight="600">DOUBLE PRECISION</tspan>
+      </text>
+      
+      <text x="0" y="264" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">sleep_hours</tspan> : <tspan fill="#F472B6" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="288" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">wellness_score</tspan> : <tspan fill="#F472B6" font-weight="600">INT</tspan>
+      </text>
+      
+      <text x="0" y="312" fill="#94A3B8" font-size="12.5" font-family="'JetBrains Mono', 'Fira Code', monospace">
+        <tspan fill="#F8FAFC" font-weight="700">notes</tspan> : <tspan fill="#F472B6" font-weight="600">VARCHAR(1000)</tspan>
+      </text>
+      
+    </g>
+  </g>
+
+  <!-- DATABASE SPECIFICATIONS PANEL (Right Side) -->
+  <g transform="translate(2260, 900)">
+    <!-- Section 1: Relational Schema Architectural Matrix -->
+    <rect x="0" y="0" width="1260" height="360" rx="12" fill="#131D31" stroke="#334155" stroke-width="1.8" />
+    <text x="28" y="36" fill="#38BDF8" font-size="17" font-weight="800" letter-spacing="1">POSTGRESQL / H2 RELATIONAL DATABASE ARCHITECTURE</text>
+    <text x="28" y="58" fill="#94A3B8" font-size="13">ACID Compliant Enterprise Schema with B-Tree Indexes, Foreign Key Cascades &amp; Domain Isolation</text>
+
+    <!-- Layers Visualization -->
+    <!-- Tier 1: Tables Count -->
+    <rect x="30" y="80" width="270" height="250" rx="10" fill="#0B1120" stroke="#0284C7" stroke-width="1.6"/>
+    <rect x="30" y="80" width="270" height="38" rx="10" fill="#0284C7"/>
+    <text x="165" y="105" fill="#FFFFFF" font-size="14" font-weight="800" text-anchor="middle">RELATIONAL TABLES (15)</text>
+    <text x="46" y="142" fill="#E2E8F0" font-size="12" font-family="monospace">• users (Identity Core)</text>
+    <text x="46" y="164" fill="#E2E8F0" font-size="12" font-family="monospace">• user_profiles (Bio/Goals)</text>
+    <text x="46" y="186" fill="#E2E8F0" font-size="12" font-family="monospace">• dosha_assessments (Prakriti)</text>
+    <text x="46" y="208" fill="#E2E8F0" font-size="12" font-family="monospace">• meal_plans &amp; items</text>
+    <text x="46" y="230" fill="#E2E8F0" font-size="12" font-family="monospace">• recipes &amp; food_items</text>
+    <text x="46" y="252" fill="#E2E8F0" font-size="12" font-family="monospace">• viruddha_combinations</text>
+    <text x="46" y="274" fill="#E2E8F0" font-size="12" font-family="monospace">• raw_food_composition</text>
+    <text x="46" y="296" fill="#E2E8F0" font-size="12" font-family="monospace">• ayurvedic_food_profiles</text>
+    <text x="46" y="318" fill="#E2E8F0" font-size="12" font-family="monospace">• womens_health &amp; logs</text>
+
+    <!-- Arrow 1 -> 2 -->
+    <path d="M 315 205 L 350 205" fill="none" stroke="#38BDF8" stroke-width="3" marker-end="url(#marker-one)"/>
+
+    <!-- Tier 2: Primary & Foreign Keys -->
+    <rect x="360" y="80" width="270" height="250" rx="10" fill="#0B1120" stroke="#059669" stroke-width="1.6"/>
+    <rect x="360" y="80" width="270" height="38" rx="10" fill="#059669"/>
+    <text x="495" y="105" fill="#FFFFFF" font-size="14" font-weight="800" text-anchor="middle">KEYS &amp; CONSTRAINTS</text>
+    <text x="376" y="142" fill="#E2E8F0" font-size="12" font-family="monospace">• 15 Primary Keys (BIGINT)</text>
+    <text x="376" y="164" fill="#E2E8F0" font-size="12" font-family="monospace">• 12 Foreign Key Joins</text>
+    <text x="376" y="186" fill="#E2E8F0" font-size="12" font-family="monospace">• 4 Unique Constraints</text>
+    <text x="376" y="208" fill="#E2E8F0" font-size="12" font-family="monospace">• Cascade Delete on items</text>
+    <text x="376" y="230" fill="#E2E8F0" font-size="12" font-family="monospace">• Dual FK on Viruddha</text>
+    <text x="376" y="252" fill="#E2E8F0" font-size="12" font-family="monospace">• 1:1 Strict Joins on Profile</text>
+    <text x="376" y="274" fill="#E2E8F0" font-size="12" font-family="monospace">• NOT NULL Security fields</text>
+    <text x="376" y="306" fill="#34D399" font-size="12" font-weight="700">✓ Referential Integrity</text>
+
+    <!-- Arrow 2 -> 3 -->
+    <path d="M 645 205 L 680 205" fill="none" stroke="#34D399" stroke-width="3" marker-end="url(#marker-one)"/>
+
+    <!-- Tier 3: Indexing & Performance -->
+    <rect x="690" y="80" width="260" height="250" rx="10" fill="#0B1120" stroke="#7C3AED" stroke-width="1.6"/>
+    <rect x="690" y="80" width="260" height="38" rx="10" fill="#7C3AED"/>
+    <text x="820" y="105" fill="#FFFFFF" font-size="14" font-weight="800" text-anchor="middle">INDEXING &amp; PERFORMANCE</text>
+    <text x="706" y="142" fill="#E2E8F0" font-size="12" font-family="monospace">• idx_otp_email (B-Tree)</text>
+    <text x="706" y="164" fill="#E2E8F0" font-size="12" font-family="monospace">• users(email) Unique Index</text>
+    <text x="706" y="186" fill="#E2E8F0" font-size="12" font-family="monospace">• raw_food(food_code) Index</text>
+    <text x="706" y="208" fill="#E2E8F0" font-size="12" font-family="monospace">• food_items(name) Index</text>
+    <text x="706" y="230" fill="#E2E8F0" font-size="12" font-family="monospace">• FK indexes on user_id</text>
+    <text x="706" y="252" fill="#E2E8F0" font-size="12" font-family="monospace">• Hibernate L2 Caching</text>
+    <text x="706" y="274" fill="#E2E8F0" font-size="12" font-family="monospace">• Sub-millisecond queries</text>
+    <text x="706" y="306" fill="#A78BFA" font-size="12" font-weight="700">✓ O(log N) Lookup Times</text>
+
+    <!-- Arrow 3 -> 4 -->
+    <path d="M 965 205 L 1000 205" fill="none" stroke="#A78BFA" stroke-width="3" marker-end="url(#marker-one)"/>
+
+    <!-- Tier 4: Storage & Engines -->
+    <rect x="1010" y="80" width="220" height="250" rx="10" fill="#0B1120" stroke="#F59E0B" stroke-width="1.6"/>
+    <rect x="1010" y="80" width="220" height="38" rx="10" fill="#D97706"/>
+    <text x="1120" y="105" fill="#FFFFFF" font-size="14" font-weight="800" text-anchor="middle">STORAGE &amp; ENGINES</text>
+    <text x="1025" y="146" fill="#FDE68A" font-size="13" font-weight="800">RDBMS Target Platforms</text>
+    <text x="1025" y="172" fill="#E2E8F0" font-size="12">• PostgreSQL 15+ (Prod)</text>
+    <text x="1025" y="198" fill="#E2E8F0" font-size="12">• H2 In-Memory (Dev/Test)</text>
+    <text x="1025" y="224" fill="#E2E8F0" font-size="12">• UTF-8 Sanskrit encoding</text>
+    <text x="1025" y="250" fill="#E2E8F0" font-size="12">• Flyway / Liquibase Ready</text>
+    <text x="1025" y="286" fill="#34D399" font-size="13" font-weight="700">✓ 100% Relational Norm</text>
+
+    <!-- Section 2: Crow's Foot Notation & ERD Legend -->
+    <rect x="0" y="380" width="1260" height="470" rx="12" fill="#131D31" stroke="#334155" stroke-width="1.8" />
+    <text x="28" y="416" fill="#FBBF24" font-size="17" font-weight="800" letter-spacing="1">CROW’S FOOT NOTATION &amp; RELATIONSHIP KEY</text>
+
+    <!-- Legend Items Grid -->
+    <!-- Col 1: Connectors -->
+    <g transform="translate(30, 445)">
+      <rect x="0" y="0" width="580" height="385" rx="10" fill="#0B1120" stroke="#334155" stroke-width="1.4"/>
+      <text x="22" y="32" fill="#E2E8F0" font-size="15" font-weight="700">Crow's Foot Cardinality Symbols:</text>
+
+      <!-- One and Only One -->
+      <path d="M 22 72 L 130 72" stroke="#38BDF8" stroke-width="2.8" marker-start="url(#marker-one)" marker-end="url(#marker-one)"/>
+      <text x="150" y="77" fill="#F1F5F9" font-size="13" font-weight="700">One and Only One (||-------||)</text>
+      <text x="150" y="96" fill="#94A3B8" font-size="12">Strict 1:1 relationship (users.id ↔ user_profiles.user_id).</text>
+
+      <!-- One to Zero or One -->
+      <path d="M 22 135 L 130 135" stroke="#F472B6" stroke-width="2.8" marker-start="url(#marker-one)" marker-end="url(#marker-one-optional)"/>
+      <text x="150" y="140" fill="#F1F5F9" font-size="13" font-weight="700">Zero or One Optional (||-------o|)</text>
+      <text x="150" y="159" fill="#94A3B8" font-size="12">Optional 1:1 join (users.id ↔ womens_health_profiles.user_id).</text>
+
+      <!-- One to Many (Zero or More) -->
+      <path d="M 22 198 L 130 198" stroke="#FBBF24" stroke-width="2.8" marker-start="url(#marker-one)" marker-end="url(#marker-crows-foot)"/>
+      <text x="150" y="203" fill="#F1F5F9" font-size="13" font-weight="700">One to Many (||-------o{)</text>
+      <text x="150" y="222" fill="#94A3B8" font-size="12">1:N relationship (users.id ↔ meal_plans.user_id, logs.user_id).</text>
+
+      <!-- Many to One / Zero -->
+      <path d="M 22 260 L 130 260" stroke="#D97706" stroke-width="2.8" marker-start="url(#marker-crows-foot)" marker-end="url(#marker-one-optional)"/>
+      <text x="150" y="265" fill="#F1F5F9" font-size="13" font-weight="700">Many to Optional One (}o-------o|)</text>
+      <text x="150" y="284" fill="#94A3B8" font-size="12">N:1 foreign reference (meal_plan_items ↔ recipes, food_items).</text>
+
+      <!-- Explanation -->
+      <text x="22" y="332" fill="#F8FAFC" font-size="13" font-weight="700">Referential Integrity Rule:</text>
+      <text x="22" y="358" fill="#94A3B8" font-size="12">Child rows store parent primary key as Foreign Key (<tspan fill="#60A5FA" font-weight="bold">FK</tspan>).</text>
+    </g>
+
+    <!-- Col 2: Column Badges & Data Types -->
+    <g transform="translate(630, 445)">
+      <rect x="0" y="0" width="600" height="385" rx="10" fill="#0B1120" stroke="#334155" stroke-width="1.4"/>
+      <text x="22" y="32" fill="#E2E8F0" font-size="15" font-weight="700">Field Constraints &amp; Schema Notation:</text>
+
+      <!-- PK Badge -->
+      <rect x="22" y="62" width="48" height="20" rx="4" fill="#DC2626"/>
+      <text x="46" y="76" fill="#FFFFFF" font-size="11" font-weight="900" text-anchor="middle">PK</text>
+      <text x="82" y="77" fill="#E2E8F0" font-size="13">Primary Key (Unique row identifier, generated by DB sequence)</text>
+
+      <!-- FK Badge -->
+      <rect x="22" y="100" width="48" height="20" rx="4" fill="#2563EB"/>
+      <text x="46" y="114" fill="#FFFFFF" font-size="11" font-weight="900" text-anchor="middle">FK</text>
+      <text x="82" y="115" fill="#E2E8F0" font-size="13">Foreign Key (References target table PK with Referential Integrity)</text>
+
+      <!-- UK Badge -->
+      <rect x="22" y="138" width="48" height="20" rx="4" fill="#7C3AED"/>
+      <text x="46" y="152" fill="#FFFFFF" font-size="11" font-weight="900" text-anchor="middle">UK</text>
+      <text x="82" y="153" fill="#E2E8F0" font-size="13">Unique Key Constraint (Enforces uniqueness, prevents duplicates)</text>
+
+      <!-- INDEX Badge -->
+      <rect x="22" y="176" width="48" height="20" rx="4" fill="#0D9488"/>
+      <text x="46" y="190" fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle">INDEX</text>
+      <text x="82" y="191" fill="#E2E8F0" font-size="13">Secondary B-Tree Index (Accelerates high-frequency lookups)</text>
+
+      <!-- NOT NULL -->
+      <text x="22" y="235" fill="#EF4444" font-size="17" font-weight="bold">*</text>
+      <text x="38" y="234" fill="#F1F5F9" font-size="13" font-weight="600">NOT NULL Constraint (Mandatory field required at INSERT time)</text>
+
+      <!-- Domain Color Key -->
+      <text x="22" y="278" fill="#F8FAFC" font-size="13" font-weight="700">Relational Module Color Palette:</text>
+      <g transform="translate(22, 298)">
+        <circle cx="7" cy="10" r="7" fill="#38BDF8"/>
+        <text x="22" y="15" fill="#E2E8F0" font-size="12">Auth &amp; Users</text>
+
+        <circle cx="130" cy="10" r="7" fill="#34D399"/>
+        <text x="145" y="15" fill="#E2E8F0" font-size="12">Dosha &amp; Prakriti</text>
+
+        <circle cx="270" cy="10" r="7" fill="#FBBF24"/>
+        <text x="285" y="15" fill="#E2E8F0" font-size="12">Diet &amp; Nutrition</text>
+
+        <circle cx="410" cy="10" r="7" fill="#2DD4BF"/>
+        <text x="425" y="15" fill="#E2E8F0" font-size="12">Food Science</text>
+      </g>
+      <g transform="translate(22, 332)">
+        <circle cx="7" cy="10" r="7" fill="#F472B6"/>
+        <text x="22" y="15" fill="#E2E8F0" font-size="12">Women's Health</text>
+
+        <circle cx="130" cy="10" r="7" fill="#818CF8"/>
+        <text x="145" y="15" fill="#E2E8F0" font-size="12">Daily Tracking</text>
+
+        <circle cx="270" cy="10" r="7" fill="#A78BFA"/>
+        <text x="285" y="15" fill="#E2E8F0" font-size="12">System Specs</text>
+      </g>
+    </g>
+
+    <!-- Section 3: Specialized Database Subsystems -->
+    <rect x="0" y="870" width="1260" height="260" rx="12" fill="#131D31" stroke="#334155" stroke-width="1.8" />
+    <text x="28" y="906" fill="#2DD4BF" font-size="17" font-weight="800" letter-spacing="1">BIOCHEMICAL &amp; AI INTEGRATED RELATIONS</text>
+    
+    <g transform="translate(30, 930)">
+      <rect x="0" y="0" width="380" height="175" rx="10" fill="#0B1120" stroke="#0D9488" stroke-width="1.4"/>
+      <text x="18" y="32" fill="#2DD4BF" font-size="14" font-weight="700">ICMR-NIN IFCT Food Code Join</text>
+      <text x="18" y="58" fill="#94A3B8" font-size="12">Biochemical to Ayurvedic Mapping:</text>
+      <text x="18" y="82" fill="#E2E8F0" font-size="12">• raw_food_composition.food_code (UK)</text>
+      <text x="18" y="104" fill="#E2E8F0" font-size="12">• 1:1 join with ayurvedic_food_profiles</text>
+      <text x="18" y="126" fill="#E2E8F0" font-size="12">• Eager-loaded during meal plan creation</text>
+      <text x="18" y="154" fill="#34D399" font-size="12" font-weight="700">✓ NutritionDatasetService</text>
+    </g>
+
+    <g transform="translate(440, 930)">
+      <rect x="0" y="0" width="380" height="175" rx="10" fill="#0B1120" stroke="#F59E0B" stroke-width="1.4"/>
+      <text x="18" y="32" fill="#FBBF24" font-size="14" font-weight="700">Viruddha Self-Referential Graph</text>
+      <text x="18" y="58" fill="#94A3B8" font-size="12">Binary Conflict Matrix:</text>
+      <text x="18" y="82" fill="#E2E8F0" font-size="12">• food_a_id -> food_items.id</text>
+      <text x="18" y="104" fill="#E2E8F0" font-size="12">• food_b_id -> food_items.id</text>
+      <text x="18" y="126" fill="#E2E8F0" font-size="12">• Prevents toxic food pairing (Virya/Matra)</text>
+      <text x="18" y="154" fill="#34D399" font-size="12" font-weight="700">✓ ViruddhaCheckerService</text>
+    </g>
+
+    <g transform="translate(850, 930)">
+      <rect x="0" y="0" width="380" height="175" rx="10" fill="#0B1120" stroke="#4F46E5" stroke-width="1.4"/>
+      <text x="18" y="32" fill="#818CF8" font-size="14" font-weight="700">ML Nutrient Intake Feedback</text>
+      <text x="18" y="58" fill="#94A3B8" font-size="12">Predictive Health Analytics:</text>
+      <text x="18" y="82" fill="#E2E8F0" font-size="12">• daily_health_logs consumed calories/iron</text>
+      <text x="18" y="104" fill="#E2E8F0" font-size="12">• womens_health_logs wellness &amp; symptoms</text>
+      <text x="18" y="126" fill="#E2E8F0" font-size="12">• ML Random Forest predicts deficiencies</text>
+      <text x="18" y="154" fill="#34D399" font-size="12" font-weight="700">✓ MlDeficiencyPredictorService</text>
+    </g>
+
+    <!-- Section 4: Referential Integrity Code Snippet -->
+    <rect x="0" y="1150" width="1260" height="310" rx="12" fill="#131D31" stroke="#334155" stroke-width="1.8" />
+    <text x="28" y="1186" fill="#A78BFA" font-size="17" font-weight="800" letter-spacing="1">PRIMARY SQL FOREIGN KEY DEFINITIONS (DDL)</text>
+    
+    <g transform="translate(30, 1205)">
+      <rect x="0" y="0" width="1200" height="230" rx="10" fill="#0B1120" stroke="#334155" stroke-width="1.4"/>
+      
+      <text x="24" y="32" fill="#38BDF8" font-size="12.5" font-family="monospace">ALTER TABLE user_profiles ADD CONSTRAINT fk_user_profile FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;</text>
+      <text x="24" y="58" fill="#38BDF8" font-size="12.5" font-family="monospace">ALTER TABLE meal_plans ADD CONSTRAINT fk_meal_plan_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;</text>
+      <text x="24" y="84" fill="#38BDF8" font-size="12.5" font-family="monospace">ALTER TABLE meal_plan_items ADD CONSTRAINT fk_item_plan FOREIGN KEY (meal_plan_id) REFERENCES meal_plans(id) ON DELETE CASCADE;</text>
+      <text x="24" y="110" fill="#38BDF8" font-size="12.5" font-family="monospace">ALTER TABLE meal_plan_items ADD CONSTRAINT fk_item_recipe FOREIGN KEY (recipe_id) REFERENCES recipes(id);</text>
+      <text x="24" y="136" fill="#38BDF8" font-size="12.5" font-family="monospace">ALTER TABLE meal_plan_items ADD CONSTRAINT fk_item_food FOREIGN KEY (food_item_id) REFERENCES food_items(id);</text>
+      <text x="24" y="162" fill="#38BDF8" font-size="12.5" font-family="monospace">ALTER TABLE viruddha_combinations ADD CONSTRAINT fk_food_a FOREIGN KEY (food_a_id) REFERENCES food_items(id);</text>
+      <text x="24" y="188" fill="#38BDF8" font-size="12.5" font-family="monospace">ALTER TABLE viruddha_combinations ADD CONSTRAINT fk_food_b FOREIGN KEY (food_b_id) REFERENCES food_items(id);</text>
+      <text x="24" y="214" fill="#34D399" font-size="12.5" font-family="monospace">ALTER TABLE ayurvedic_food_profiles ADD CONSTRAINT fk_raw_food FOREIGN KEY (raw_food_id) REFERENCES raw_food_composition(id);</text>
+    </g>
+  </g>
+
+</svg>
+    </div>
+  </div>
+
+  <canvas id="exportCanvas" style="display:none;"></canvas>
+
+  <script>
+    let scale = 0.5;
+    const container = document.getElementById('diagram-container');
+    const viewport = document.getElementById('viewport');
+
+    function updateTransform() {
+      container.style.transform = `scale(${scale})`;
+    }
+
+    function zoomIn() {
+      scale = Math.min(scale + 0.1, 2.5);
+      updateTransform();
+    }
+
+    function zoomOut() {
+      scale = Math.max(scale - 0.1, 0.2);
+      updateTransform();
+    }
+
+    function resetZoom() {
+      scale = 1.0;
+      updateTransform();
+    }
+
+    function fitScreen() {
+      const availWidth = viewport.clientWidth - 80;
+      scale = availWidth / 3600;
+      updateTransform();
+    }
+
+    window.addEventListener('load', () => {
+      fitScreen();
+    });
+
+    function downloadSVG() {
+      const svgData = document.querySelector('svg').outerHTML;
+      const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ayurwell_er_diagram.svg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadPNG() {
+      const svgElement = document.querySelector('svg');
+      const svgString = new XMLSerializer().serializeToString(svgElement);
+      const canvas = document.getElementById('exportCanvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const URL = window.URL || window.webkitURL || window;
+      const blobURL = URL.createObjectURL(svgBlob);
+
+      canvas.width = 3600;
+      canvas.height = 2420;
+
+      img.onload = function() {
+        ctx.fillStyle = '#080c15';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        const pngURL = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = pngURL;
+        a.download = 'ayurwell_er_diagram.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+      img.src = blobURL;
+    }
+  </script>
+</body>
+</html>

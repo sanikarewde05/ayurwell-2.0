@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #1B4D3E;
+  --color-forest-light: #256753;
+  --color-forest-dark: #12352B;
+  --color-sage: #87A96B;
+  --color-sage-light: #F2F6F0;
+  --color-ivory: #FAF7F2;
+  --color-ivory-dark: #EFECE6;
+  --color-terracotta: #C86D51;
+  --color-gold: #D4AF37;
+  --color-gold-light: #F3C74D;
+  --color-charcoal: #2C3531;
+  --color-charcoal-muted: #5C6561;
+}
+
+@layer base {
+  :root {
+    --color-forest: #1B4D3E;
+    --color-forest-light: #256753;
+    --color-forest-dark: #12352B;
+    --color-sage: #87A96B;
+    --color-sage-light: #F2F6F0;
+    --color-ivory: #FAF7F2;
+    --color-ivory-dark: #EFECE6;
+    --color-terracotta: #C86D51;
+    --color-gold: #D4AF37;
+    --color-gold-light: #F3C74D;
+    --color-charcoal: #2C3531;
+    --color-charcoal-muted: #5C6561;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Custom Utilities for AyurWell Premium Aesthetic */
+.bg-ivory { background-color: #FAF7F2; }
+.bg-forest { background-color: #1B4D3E; }
+.bg-forest-light { background-color: #256753; }
+.bg-sage-light { background-color: #F2F6F0; }
+.bg-terracotta { background-color: #C86D51; }
+
+.text-forest { color: #1B4D3E; }
+.text-sage { color: #87A96B; }
+.text-terracotta { color: #C86D51; }
+.text-gold { color: #D4AF37; }
+.text-charcoal { color: #2C3531; }
+.text-charcoal-muted { color: #5C6561; }
+
+.border-forest { border-color: #1B4D3E; }
+.border-sage { border-color: #87A96B; }
+.border-ivory-dark { border-color: #EFECE6; }
+
+.shadow-ayur {
+  box-shadow: 0 4px 20px rgba(27, 77, 62, 0.05);
+}
+.shadow-ayur-lg {
+  box-shadow: 0 10px 30px rgba(27, 77, 62, 0.08);
+}
+
+/* Neutralize aggressive browser autofill blue/yellow background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+  box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #2C3531 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+

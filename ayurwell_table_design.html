@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AyurWell — Database Table Design Specification</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --pk-color: #dc2626;
+      --fk-color: #2563eb;
+      --uk-color: #059669;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 10px 0;
+      font-size: 32px;
+      letter-spacing: -0.5px;
+    }
+    header p {
+      margin: 0;
+      color: #94a3b8;
+      font-size: 16px;
+    }
+    .container {
+      max-width: 1300px;
+      margin: -20px auto 60px auto;
+      padding: 0 20px;
+    }
+    .nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      border: 1px solid var(--border);
+    }
+    .nav-btn {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .nav-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .domain-section {
+      margin-bottom: 40px;
+    }
+    .domain-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .domain-badge {
+      font-size: 12px;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .table-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .table-header {
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .table-header h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .table-purpose {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 4px 0 0 0;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+    .data-table th {
+      background: #ffffff;
+      color: #475569;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .data-table tr:hover td {
+      background: #f8fafc;
+    }
+    .col-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .data-type {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #0369a1;
+      font-size: 13px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: ui-monospace, monospace;
+      margin-right: 4px;
+    }
+    .tag-pk { background: #fee2e2; color: var(--pk-color); }
+    .tag-fk { background: #dbeafe; color: var(--fk-color); }
+    .tag-uk { background: #d1fae5; color: var(--uk-color); }
+    .tag-req { background: #fef3c7; color: #b45309; }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    .ref-link:hover { text-decoration: underline; }
+    @media print {
+      .nav-bar { display: none; }
+      body { background: #ffffff; }
+      .table-card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AyurWell Healthcare Platform</h1>
+    <p>Database Table Design Specification &amp; Data Dictionary (15 Relational Tables)</p>
+  </header>
+
+  <div class="container">
+    <div class="nav-bar">
+      <a href="#d1" class="nav-btn">1. Auth &amp; Users</a>
+      <a href="#d2" class="nav-btn">2. Prakriti Assessment</a>
+      <a href="#d3" class="nav-btn">3. Diet &amp; Recipes</a>
+      <a href="#d4" class="nav-btn">4. Food Science (IFCT)</a>
+      <a href="#d5" class="nav-btn">5. Women's Health</a>
+      <a href="#d6" class="nav-btn">6. Lifestyle &amp; Logs</a>
+      <button onclick="window.print()" class="nav-btn" style="margin-left: auto; background: #0f172a; color: #fff;">Print / Save as PDF</button>
+    </div>
+
+    <!-- DOMAIN 1 -->
+    <div class="domain-section" id="d1">
+      <div class="domain-title">
+        1. Authentication &amp; User Identity Domain
+        <span class="domain-badge">3 Tables</span>
+      </div>
+
+      <!-- users -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>users</h3>
+            <p class="table-purpose">Core identity credentials, security tokens, roles, and status flags.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Primary key</td></tr>
+            <tr><td class="col-name">email</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-uk">UK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Unique login email</td></tr>
+            <tr><td class="col-name">password</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>BCrypt password hash</td></tr>
+            <tr><td class="col-name">full_name</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>User legal/display name</td></tr>
+            <tr><td class="col-name">role</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>'ROLE_USER'</td><td>—</td><td>Security authority role</td></tr>
+            <tr><td class="col-name">active</td><td class="data-type">BOOLEAN</td><td><span class="tag tag-req">NOT NULL</span></td><td>TRUE</td><td>—</td><td>Account enabled flag</td></tr>
+            <tr><td class="col-name">email_verified</td><td class="data-type">BOOLEAN</td><td><span class="tag tag-req">NOT NULL</span></td><td>FALSE</td><td>—</td><td>OTP verification confirmation</td></tr>
+            <tr><td class="col-name">created_at</td><td class="data-type">TIMESTAMP</td><td><span class="tag tag-req">NOT NULL</span></td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Account creation timestamp</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- user_profiles -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>user_profiles</h3>
+            <p class="table-purpose">Physical biometrics, baseline Ayurvedic Prakriti, digestive fire (Agni), and dietary goals.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Profile identifier</td></tr>
+            <tr><td class="col-name">user_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-uk">UK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">users(id) [CASCADE]</span></td><td>1:1 relationship to user</td></tr>
+            <tr><td class="col-name">age</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>User age in years</td></tr>
+            <tr><td class="col-name">gender</td><td class="data-type">VARCHAR(20)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Gender identity</td></tr>
+            <tr><td class="col-name">weight_kg</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Weight in kilograms</td></tr>
+            <tr><td class="col-name">height_cm</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Height in centimeters</td></tr>
+            <tr><td class="col-name">activity_level</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Sedentary, Light, Moderate, Active</td></tr>
+            <tr><td class="col-name">budget_per_day_inr</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>150.00</td><td>—</td><td>Target daily food spend in INR</td></tr>
+            <tr><td class="col-name">primary_health_goal</td><td class="data-type">VARCHAR(100)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Weight Loss, Immunity, Digestion</td></tr>
+            <tr><td class="col-name">primary_dosha</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>VATA, PITTA, KAPHA</td></tr>
+            <tr><td class="col-name">digestive_fire_agni</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>SAMA_AGNI, VISHAMA, TIKSHNA, MANDA</td></tr>
+            <tr><td class="col-name">target_disease_condition</td><td class="data-type">VARCHAR(100)</td><td>NULLABLE</td><td>'None'</td><td>—</td><td>Diabetes, Hypertension, GERD, IBS</td></tr>
+            <tr><td class="col-name">profile_completed</td><td class="data-type">BOOLEAN</td><td><span class="tag tag-req">NOT NULL</span></td><td>FALSE</td><td>—</td><td>Onboarding status indicator</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- email_otps -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>email_otps</h3>
+            <p class="table-purpose">Time-limited one-time verification tokens and brute-force throttling counters.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>OTP transaction identifier</td></tr>
+            <tr><td class="col-name">email</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Recipient email</td></tr>
+            <tr><td class="col-name">otp_hash</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>SHA-256 hashed code</td></tr>
+            <tr><td class="col-name">expires_at</td><td class="data-type">TIMESTAMP</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Expiry timestamp (10 mins)</td></tr>
+            <tr><td class="col-name">verified</td><td class="data-type">BOOLEAN</td><td><span class="tag tag-req">NOT NULL</span></td><td>FALSE</td><td>—</td><td>Consumed flag</td></tr>
+            <tr><td class="col-name">attempts</td><td class="data-type">INTEGER</td><td><span class="tag tag-req">NOT NULL</span></td><td>0</td><td>—</td><td>Failed attempts count</td></tr>
+            <tr><td class="col-name">created_at</td><td class="data-type">TIMESTAMP</td><td><span class="tag tag-req">NOT NULL</span></td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Dispatch timestamp</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN 2 -->
+    <div class="domain-section" id="d2">
+      <div class="domain-title">
+        2. Ayurvedic Prakriti Assessment Domain
+        <span class="domain-badge">1 Table</span>
+      </div>
+
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>dosha_assessments</h3>
+            <p class="table-purpose">Diagnostic scoring of Tridosha constitution (Vata, Pitta, Kapha) and assessment timestamps.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Assessment identifier</td></tr>
+            <tr><td class="col-name">user_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">users(id) [CASCADE]</span></td><td>Owning user (1:N)</td></tr>
+            <tr><td class="col-name">vata_score</td><td class="data-type">INTEGER</td><td><span class="tag tag-req">NOT NULL</span></td><td>0</td><td>—</td><td>Calculated Vata score</td></tr>
+            <tr><td class="col-name">pitta_score</td><td class="data-type">INTEGER</td><td><span class="tag tag-req">NOT NULL</span></td><td>0</td><td>—</td><td>Calculated Pitta score</td></tr>
+            <tr><td class="col-name">kapha_score</td><td class="data-type">INTEGER</td><td><span class="tag tag-req">NOT NULL</span></td><td>0</td><td>—</td><td>Calculated Kapha score</td></tr>
+            <tr><td class="col-name">primary_prakriti</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Primary dominant dosha</td></tr>
+            <tr><td class="col-name">secondary_prakriti</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Secondary dosha</td></tr>
+            <tr><td class="col-name">assessed_at</td><td class="data-type">TIMESTAMP</td><td><span class="tag tag-req">NOT NULL</span></td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Test completion date/time</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN 3 -->
+    <div class="domain-section" id="d3">
+      <div class="domain-title">
+        3. Diet Planning &amp; Nutrition Engine Domain
+        <span class="domain-badge">5 Tables</span>
+      </div>
+
+      <!-- meal_plans -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>meal_plans</h3>
+            <p class="table-purpose">7-day customized Ayurvedic dietary regimens tailored for season, disease, and budget.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Meal plan identifier</td></tr>
+            <tr><td class="col-name">user_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">users(id) [CASCADE]</span></td><td>Owner user</td></tr>
+            <tr><td class="col-name">plan_name</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Title of meal plan</td></tr>
+            <tr><td class="col-name">target_disease</td><td class="data-type">VARCHAR(100)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Target medical condition</td></tr>
+            <tr><td class="col-name">season</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Ayurvedic Ritu season</td></tr>
+            <tr><td class="col-name">womens_health_stage</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Menstrual / Pregnancy stage</td></tr>
+            <tr><td class="col-name">total_daily_budget_inr</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Total daily cost in INR</td></tr>
+            <tr><td class="col-name">total_daily_calories</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Total daily energy in kcal</td></tr>
+            <tr><td class="col-name">ayurvedic_nutrition_score</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>Algorithmic score (0 - 100)</td></tr>
+            <tr><td class="col-name">created_at</td><td class="data-type">TIMESTAMP</td><td><span class="tag tag-req">NOT NULL</span></td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Plan generation timestamp</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- meal_plan_items -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>meal_plan_items</h3>
+            <p class="table-purpose">Individual scheduled meal slots linking to recipes or standalone food items.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Item identifier</td></tr>
+            <tr><td class="col-name">meal_plan_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">meal_plans(id) [CASCADE]</span></td><td>Parent meal plan</td></tr>
+            <tr><td class="col-name">meal_type</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>BREAKFAST, LUNCH, DINNER, SNACK</td></tr>
+            <tr><td class="col-name">day_of_week</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Day name (Monday, etc.)</td></tr>
+            <tr><td class="col-name">recipe_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span></td><td>NULL</td><td><span class="ref-link">recipes(id) [SET NULL]</span></td><td>Prepared dish reference</td></tr>
+            <tr><td class="col-name">food_item_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span></td><td>NULL</td><td><span class="ref-link">food_items(id) [SET NULL]</span></td><td>Raw food reference</td></tr>
+            <tr><td class="col-name">portion_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Serving size in grams</td></tr>
+            <tr><td class="col-name">item_cost_inr</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Cost for this portion in INR</td></tr>
+            <tr><td class="col-name">item_calories</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Calories for this portion</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- recipes -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>recipes</h3>
+            <p class="table-purpose">Curated Ayurvedic formulations with dosha pacification and preparation instructions.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Recipe identifier</td></tr>
+            <tr><td class="col-name">title</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Recipe name</td></tr>
+            <tr><td class="col-name">description</td><td class="data-type">VARCHAR(1000)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Culinary overview</td></tr>
+            <tr><td class="col-name">meal_type</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Meal category</td></tr>
+            <tr><td class="col-name">suitable_dosha</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Pacified dosha</td></tr>
+            <tr><td class="col-name">suitable_season</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Seasonal appropriateness</td></tr>
+            <tr><td class="col-name">prep_time_mins</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>Cooking duration in minutes</td></tr>
+            <tr><td class="col-name">cost_per_serving_inr</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Cost per serving</td></tr>
+            <tr><td class="col-name">calories</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Energy in kcal</td></tr>
+            <tr><td class="col-name">protein_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Protein in grams</td></tr>
+            <tr><td class="col-name">carbs_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Carbs in grams</td></tr>
+            <tr><td class="col-name">fat_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Fats in grams</td></tr>
+            <tr><td class="col-name">iron_mg</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Iron in mg</td></tr>
+            <tr><td class="col-name">instructions</td><td class="data-type">TEXT</td><td>NULLABLE</td><td>—</td><td>—</td><td>Preparation steps</td></tr>
+            <tr><td class="col-name">suitable_disease_conditions</td><td class="data-type">VARCHAR(255)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Therapeutic applications</td></tr>
+            <tr><td class="col-name">suitable_womens_health_stage</td><td class="data-type">VARCHAR(255)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Maternal suitability</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- food_items -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>food_items</h3>
+            <p class="table-purpose">Master ingredients catalog with Rasa, Virya, Vipaka, and macro/micronutrients.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Food item identifier</td></tr>
+            <tr><td class="col-name">name</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-uk">UK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Unique food name</td></tr>
+            <tr><td class="col-name">category</td><td class="data-type">VARCHAR(100)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Food group / category</td></tr>
+            <tr><td class="col-name">rasa</td><td class="data-type">VARCHAR(100)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Primary tastes</td></tr>
+            <tr><td class="col-name">virya</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Thermal potency</td></tr>
+            <tr><td class="col-name">vipaka</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Post-digestive effect</td></tr>
+            <tr><td class="col-name">dosha_effect</td><td class="data-type">VARCHAR(100)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Action on Tridosha</td></tr>
+            <tr><td class="col-name">calories</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Energy per 100g</td></tr>
+            <tr><td class="col-name">protein_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Protein per 100g</td></tr>
+            <tr><td class="col-name">carbs_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Carbs per 100g</td></tr>
+            <tr><td class="col-name">fat_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Fats per 100g</td></tr>
+            <tr><td class="col-name">iron_mg</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Iron per 100g</td></tr>
+            <tr><td class="col-name">calcium_mg</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Calcium per 100g</td></tr>
+            <tr><td class="col-name">fiber_grams</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Fiber per 100g</td></tr>
+            <tr><td class="col-name">estimated_cost_inr</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Retail price per 100g</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- viruddha_combinations -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>viruddha_combinations</h3>
+            <p class="table-purpose">Incompatible food matrix identifying toxic combinations, health hazards, and antidotes.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Combination identifier</td></tr>
+            <tr><td class="col-name">food_a_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">food_items(id) [CASCADE]</span></td><td>First food item</td></tr>
+            <tr><td class="col-name">food_b_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">food_items(id) [CASCADE]</span></td><td>Second food item</td></tr>
+            <tr><td class="col-name">incompatibility_type</td><td class="data-type">VARCHAR(100)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Virya, Rasa, or Samskara Viruddha</td></tr>
+            <tr><td class="col-name">health_hazard_reason</td><td class="data-type">VARCHAR(500)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Adverse physiological outcome</td></tr>
+            <tr><td class="col-name">antidote_recommendation</td><td class="data-type">VARCHAR(500)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Ayurvedic counter-remedy</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN 4 -->
+    <div class="domain-section" id="d4">
+      <div class="domain-title">
+        4. Biochemical Food Science &amp; Dravyaguna Domain
+        <span class="domain-badge">2 Tables</span>
+      </div>
+
+      <!-- raw_food_composition -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>raw_food_composition</h3>
+            <p class="table-purpose">ICMR-NIN Indian Food Composition Tables (IFCT 2017) raw nutritional database.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Composition ID</td></tr>
+            <tr><td class="col-name">food_code</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-uk">UK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Official ICMR-NIN code</td></tr>
+            <tr><td class="col-name">food_name</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Scientific food name</td></tr>
+            <tr><td class="col-name">category</td><td class="data-type">VARCHAR(100)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Food group</td></tr>
+            <tr><td class="col-name">energy_kcal</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Energy per 100g</td></tr>
+            <tr><td class="col-name">protein_grams</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Protein per 100g</td></tr>
+            <tr><td class="col-name">carbs_grams</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Available carbs</td></tr>
+            <tr><td class="col-name">fat_grams</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Total lipids</td></tr>
+            <tr><td class="col-name">fiber_grams</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Dietary fiber</td></tr>
+            <tr><td class="col-name">iron_mg</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Iron content</td></tr>
+            <tr><td class="col-name">calcium_mg</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Calcium content</td></tr>
+            <tr><td class="col-name">vitamin_c_mg</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>0.0</td><td>—</td><td>Vitamin C content</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ayurvedic_food_profiles -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>ayurvedic_food_profiles</h3>
+            <p class="table-purpose">1:1 mapping linking ICMR-NIN IFCT raw foods to classical Ayurvedic energetics.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Profile ID</td></tr>
+            <tr><td class="col-name">raw_food_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-uk">UK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">raw_food_composition(id) [CASCADE]</span></td><td>1:1 foreign key</td></tr>
+            <tr><td class="col-name">sanskrit_name</td><td class="data-type">VARCHAR(255)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Classical Sanskrit name</td></tr>
+            <tr><td class="col-name">rasa</td><td class="data-type">VARCHAR(100)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>6 Ayurvedic tastes</td></tr>
+            <tr><td class="col-name">virya</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Thermal potency</td></tr>
+            <tr><td class="col-name">vipaka</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Post-digestive result</td></tr>
+            <tr><td class="col-name">dosha_effect</td><td class="data-type">VARCHAR(100)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Effect on Doshas</td></tr>
+            <tr><td class="col-name">suitable_ritu_seasons</td><td class="data-type">VARCHAR(255)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Seasonal suitability</td></tr>
+            <tr><td class="col-name">classical_text_reference</td><td class="data-type">VARCHAR(255)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Samhita reference</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN 5 -->
+    <div class="domain-section" id="d5">
+      <div class="domain-title">
+        5. Women's Health &amp; Stree Swasthya Domain
+        <span class="domain-badge">2 Tables</span>
+      </div>
+
+      <!-- womens_health_profiles -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>womens_health_profiles</h3>
+            <p class="table-purpose">Menstrual cycle length, pregnancy trimester, menopause, and iron RDA targets.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Profile ID</td></tr>
+            <tr><td class="col-name">user_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-uk">UK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">users(id) [CASCADE]</span></td><td>1:1 foreign key</td></tr>
+            <tr><td class="col-name">health_stage</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>'GENERAL'</td><td>—</td><td>MENSTRUAL, PREGNANCY, MENOPAUSE</td></tr>
+            <tr><td class="col-name">pregnancy_trimester</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>Trimester (1, 2, 3)</td></tr>
+            <tr><td class="col-name">cycle_phase</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Follicular, Luteal, Menstrual</td></tr>
+            <tr><td class="col-name">cycle_length_days</td><td class="data-type">INTEGER</td><td><span class="tag tag-req">NOT NULL</span></td><td>28</td><td>—</td><td>Cycle length</td></tr>
+            <tr><td class="col-name">daily_iron_target_mg</td><td class="data-type">DOUBLE PRECISION</td><td><span class="tag tag-req">NOT NULL</span></td><td>18.0</td><td>—</td><td>Daily iron requirement</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- womens_health_logs -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>womens_health_logs</h3>
+            <p class="table-purpose">Daily observation logs tracking cycle symptoms, cramps, flow, mood, and iron intake.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Log ID</td></tr>
+            <tr><td class="col-name">user_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">users(id) [CASCADE]</span></td><td>Owning user (1:N)</td></tr>
+            <tr><td class="col-name">log_date</td><td class="data-type">DATE</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Log calendar date</td></tr>
+            <tr><td class="col-name">flow_level</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Light, Medium, Heavy</td></tr>
+            <tr><td class="col-name">cramps_severity</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Mild, Moderate, Severe</td></tr>
+            <tr><td class="col-name">mood</td><td class="data-type">VARCHAR(50)</td><td>NULLABLE</td><td>—</td><td>—</td><td>Emotional state</td></tr>
+            <tr><td class="col-name">iron_intake_mg</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Iron consumed</td></tr>
+            <tr><td class="col-name">wellness_score</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>Wellness score (0 - 100)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOMAIN 6 -->
+    <div class="domain-section" id="d6">
+      <div class="domain-title">
+        6. Dinacharya &amp; Daily Lifestyle Domain
+        <span class="domain-badge">2 Tables</span>
+      </div>
+
+      <!-- daily_health_logs -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>daily_health_logs</h3>
+            <p class="table-purpose">Circadian wellness tracking, hydration, sleep quality, and digestive fire rating.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Log ID</td></tr>
+            <tr><td class="col-name">user_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">users(id) [CASCADE]</span></td><td>Owning user (1:N)</td></tr>
+            <tr><td class="col-name">log_date</td><td class="data-type">DATE</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Calendar date</td></tr>
+            <tr><td class="col-name">calories_consumed</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Daily calories</td></tr>
+            <tr><td class="col-name">water_intake_liters</td><td class="data-type">DOUBLE PRECISION</td><td>NULLABLE</td><td>—</td><td>—</td><td>Water in liters</td></tr>
+            <tr><td class="col-name">energy_level_rating</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>Energy rating (1 - 10)</td></tr>
+            <tr><td class="col-name">digestion_quality_rating</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>Agni quality (1 - 10)</td></tr>
+            <tr><td class="col-name">ayur_score_today</td><td class="data-type">INTEGER</td><td>NULLABLE</td><td>—</td><td>—</td><td>Daily AyurScore (0 - 100)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- reminders -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3>reminders</h3>
+            <p class="table-purpose">Circadian Dinacharya schedules, herb intake alerts, and hydration timers.</p>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Default</th><th>References</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col-name">id</td><td class="data-type">BIGINT</td><td><span class="tag tag-pk">PK</span><span class="tag tag-req">NOT NULL</span></td><td>IDENTITY</td><td>—</td><td>Reminder ID</td></tr>
+            <tr><td class="col-name">user_id</td><td class="data-type">BIGINT</td><td><span class="tag tag-fk">FK</span><span class="tag tag-req">NOT NULL</span></td><td>—</td><td><span class="ref-link">users(id) [CASCADE]</span></td><td>Target user</td></tr>
+            <tr><td class="col-name">title</td><td class="data-type">VARCHAR(255)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Reminder headline</td></tr>
+            <tr><td class="col-name">reminder_time</td><td class="data-type">TIME</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>Daily trigger clock time</td></tr>
+            <tr><td class="col-name">category</td><td class="data-type">VARCHAR(50)</td><td><span class="tag tag-req">NOT NULL</span></td><td>—</td><td>—</td><td>HERB, WATER, MEAL, ROUTINE</td></tr>
+            <tr><td class="col-name">enabled</td><td class="data-type">BOOLEAN</td><td><span class="tag tag-req">NOT NULL</span></td><td>TRUE</td><td>—</td><td>Active toggle</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

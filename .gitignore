@@ -1,0 +1,33 @@
+# Node dependencies & build
+node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment & credentials (IMPORTANT: protects email app password)
+.env
+.env.local
+.env.*.local
+*.env
+
+# Java & Maven
+target/
+*.class
+*.jar
+*.war
+.m2/
+data/
+
+# IDE & OS
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Ayurwell runtime data
+ayurwell-backend/data/

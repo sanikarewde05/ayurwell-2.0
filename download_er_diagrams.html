@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download AyurWell ER Diagrams</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 40px 20px;
+      color: #1a202c;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+      color: #2d3748;
+    }
+    p {
+      color: #4a5568;
+      font-size: 16px;
+    }
+    .success-alert {
+      background: #e6fffa;
+      border: 1px solid #38b2ac;
+      color: #234e52;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e2e8f0;
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #2d3748;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: #718096;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .preview {
+      background: #fafafa;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
+    }
+    .preview img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+    }
+    .btn-group {
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .btn-primary {
+      background: #3182ce;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #2b6cb0;
+    }
+    .btn-secondary {
+      background: #edf2f7;
+      color: #4a5568;
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AyurWell — ER Diagram Downloads</h1>
+      <p>High-resolution Entity-Relationship Diagrams in PNG and SVG formats</p>
+    </div>
+
+    <div class="success-alert">
+      <span style="font-size: 24px;">&#10004;</span>
+      <div>
+        <strong>Files automatically delivered to your Downloads and Desktop folders!</strong><br />
+        Saved as: <code>C:\Users\dubey\Downloads\AyurWell_Chen_ER_Diagram.png</code> and <code>AyurWell_Relational_ER_Diagram.png</code>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Card 1: Chen Notation (Notebook Style) -->
+      <div class="card">
+        <div class="card-title">Classical Peter Chen ER Diagram</div>
+        <div class="card-desc">
+          Exact laboratory practical notebook style with Entity Rectangles, Relationship Diamonds, Attribute Ovals, Underlined Primary Keys, and Notation Legend.
+        </div>
+        <div class="preview">
+          <img src="ayurwell_chen_erd.png" alt="Chen ER Diagram Preview" />
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="ayurwell_chen_erd.png" download="AyurWell_Chen_ER_Diagram.png">Download PNG</a>
+          <a class="btn btn-secondary" href="ayurwell_chen_erd.svg" download="AyurWell_Chen_ER_Diagram.svg">Download SVG</a>
+        </div>
+      </div>
+
+      <!-- Card 2: Relational Tables Style -->
+      <div class="card">
+        <div class="card-title">Relational Tables ER Diagram</div>
+        <div class="card-desc">
+          Textbook relational database schema layout with all 15 tables, exact column names, SQL data types, PK/FK flags, and orthogonal connection lines.
+        </div>
+        <div class="preview">
+          <img src="ayurwell_er_diagram_academic.png" alt="Relational ER Diagram Preview" />
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="ayurwell_er_diagram_academic.png" download="AyurWell_Relational_ER_Diagram.png">Download PNG</a>
+          <a class="btn btn-secondary" href="ayurwell_er_diagram_academic.svg" download="AyurWell_Relational_ER_Diagram.svg">Download SVG</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Modern Crow's Foot Style -->
+      <div class="card">
+        <div class="card-title">Modern Crow's Foot Notation</div>
+        <div class="card-desc">
+          Professional high-contrast architecture diagram with Crow's Foot cardinality markers, database domain panels, and SQL DDL reference.
+        </div>
+        <div class="preview">
+          <img src="ayurwell_er_diagram.png" alt="Crow's Foot ER Diagram Preview" />
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="ayurwell_er_diagram.png" download="AyurWell_CrowsFoot_ER_Diagram.png">Download PNG</a>
+          <a class="btn btn-secondary" href="ayurwell_er_diagram.svg" download="AyurWell_CrowsFoot_ER_Diagram.svg">Download SVG</a>
+        </div>
+      </div>
+
+      <!-- Card 4: Database Table Design Image -->
+      <div class="card">
+        <div class="card-title">Database Table Design Specification</div>
+        <div class="card-desc">
+          Complete data dictionary in image form across all 15 tables with column names, SQL data types, PK/FK/UK constraints, defaults, and foreign keys.
+        </div>
+        <div class="preview">
+          <img src="ayurwell_table_design.png" alt="Table Design Specification Preview" />
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="ayurwell_table_design.png" download="AyurWell_Table_Design.png">Download PNG</a>
+          <a class="btn btn-secondary" href="ayurwell_table_design.svg" download="AyurWell_Table_Design.svg">Download SVG</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

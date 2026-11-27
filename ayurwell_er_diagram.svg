@@ -1,0 +1,534 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 2200" width="2600" height="2200">
+<defs>
+  <!-- Direct Solid Arrowhead -->
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#000000" />
+  </marker>
+</defs>
+
+<!-- Crisp Clean White Canvas -->
+<rect width="2600" height="2200" fill="#FFFFFF" />
+
+<!-- Top Title matching reference image -->
+<g id="diagram_title">
+  <text x="60" y="65" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="bold" fill="#3b4d3c">Entity Relationship diagram</text>
+  <line x1="60" y1="78" x2="440" y2="78" stroke="#3b4d3c" stroke-width="2" />
+</g>
+
+<!-- Relationship Connecting Lines -->
+<g id="relationships">
+  <path d="M 1300,306 L 1300,430" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1160,180 L 940,180" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1440,180 L 1660,180" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1210,306 L 1210,360 L 340,360 L 340,460" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1250,306 L 1250,390 L 810,390 L 810,490" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1440,540 L 1660,540" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1950,540 L 2130,540" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1300,726 L 1300,890" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1300,1126 L 1300,1280" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 1160,1380 L 960,1380" stroke="#000000" stroke-width="1.5" stroke-dasharray="6,5" fill="none" marker-end="url(#arrow)" />
+  <path d="M 1440,1380 L 1660,1380" stroke="#000000" stroke-width="1.5" stroke-dasharray="6,5" fill="none" marker-end="url(#arrow)" />
+  <path d="M 1940,1380 L 2130,1380" stroke="#000000" stroke-width="1.5" stroke-dasharray="6,5" fill="none" marker-end="url(#arrow)" />
+  <path d="M 490,1850 L 680,1850" stroke="#000000" stroke-width="1.5"  fill="none" marker-end="url(#arrow)" />
+  <path d="M 970,1850 L 1800,1850 L 1800,1544" stroke="#000000" stroke-width="1.5" stroke-dasharray="6,5" fill="none" marker-end="url(#arrow)" />
+</g>
+
+<!-- Relationship Labels -->
+<g id="relationship_labels">
+  <rect x="1265.75" y="358" width="68.5" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1300" y="372" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">user_id</text>
+  <rect x="1023.25" y="170" width="53.5" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1050" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">email</text>
+  <rect x="1515.75" y="170" width="68.5" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1550" y="184" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">user_id</text>
+  <rect x="497" y="350" width="46" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="520" y="364" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">logs</text>
+  <rect x="957" y="380" width="46" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="980" y="394" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">sets</text>
+  <rect x="1512" y="530" width="76" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1550" y="544" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">profiles</text>
+  <rect x="2009.5" y="530" width="61" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="2040" y="544" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">tracks</text>
+  <rect x="1265.75" y="798" width="68.5" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1300" y="812" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">manages</text>
+  <rect x="1262" y="1193" width="76" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1300" y="1207" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">contains</text>
+  <rect x="1018.25" y="1370" width="83.5" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1060" y="1384" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">recipe_id</text>
+  <rect x="1497" y="1370" width="106" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1550" y="1384" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">food_item_id</text>
+  <rect x="1970.75" y="1370" width="128.5" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="2035" y="1384" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">food_a / food_b</text>
+  <rect x="535.75" y="1840" width="98.5" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="585" y="1854" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">raw_food_id</text>
+  <rect x="1339.5" y="1840" width="91" height="20" fill="#FFFFFF" stroke="#000000" stroke-width="0.8" rx="2" />
+  <text x="1385" y="1854" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000" text-anchor="middle">classifies</text>
+</g>
+
+<!-- Entity Table Boxes -->
+<g id="entity_tables">
+  <!-- Table: USERS -->
+  <g id="table_USERS">
+    <rect x="1160" y="110" width="280" height="198" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="1160" y="110" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="1300" y="130" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">USERS</text>
+    <line x1="1160" y1="140" x2="1440" y2="140" stroke="#000000" stroke-width="1.5" />
+    <line x1="1340" y1="140" x2="1340" y2="308" stroke="#000000" stroke-width="1" />
+    <text x="1168" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="1188" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="1350" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1170" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">email</text>
+    <text x="1350" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="198" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">password</text>
+    <text x="1350" y="198" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="218" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">full_name</text>
+    <text x="1350" y="218" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">role</text>
+    <text x="1350" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">active</text>
+    <text x="1350" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Boolean</text>
+    <text x="1170" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">email_verified</text>
+    <text x="1350" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Boolean</text>
+    <text x="1170" y="298" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">created_at</text>
+    <text x="1350" y="298" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">DateTime</text>
+  </g>
+  <!-- Table: EMAIL_OTPS -->
+  <g id="table_EMAIL_OTPS">
+    <rect x="680" y="110" width="260" height="178" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="680" y="110" width="260" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="810" y="130" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">EMAIL_OTPS</text>
+    <line x1="680" y1="140" x2="940" y2="140" stroke="#000000" stroke-width="1.5" />
+    <line x1="845" y1="140" x2="845" y2="288" stroke="#000000" stroke-width="1" />
+    <text x="688" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="708" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="855" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="690" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">email</text>
+    <text x="855" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="198" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">otp_hash</text>
+    <text x="855" y="198" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="218" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">expires_at</text>
+    <text x="855" y="218" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">DateTime</text>
+    <text x="690" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">verified</text>
+    <text x="855" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Boolean</text>
+    <text x="690" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">attempts</text>
+    <text x="855" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="690" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">created_at</text>
+    <text x="855" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">DateTime</text>
+  </g>
+  <!-- Table: DOSHA_ASSESSMENTS -->
+  <g id="table_DOSHA_ASSESSMENTS">
+    <rect x="1660" y="110" width="280" height="198" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="1660" y="110" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="1800" y="130" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">DOSHA_ASSESSMENTS</text>
+    <line x1="1660" y1="140" x2="1940" y2="140" stroke="#000000" stroke-width="1.5" />
+    <line x1="1840" y1="140" x2="1840" y2="308" stroke="#000000" stroke-width="1" />
+    <text x="1668" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="1688" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="1850" y="158" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1668" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="1688" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+    <text x="1850" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="198" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">vata_score</text>
+    <text x="1850" y="198" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="218" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">pitta_score</text>
+    <text x="1850" y="218" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">kapha_score</text>
+    <text x="1850" y="238" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">primary_prakriti</text>
+    <text x="1850" y="258" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">secondary_prakriti</text>
+    <text x="1850" y="278" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="298" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">assessed_at</text>
+    <text x="1850" y="298" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">DateTime</text>
+  </g>
+  <!-- Table: USER_PROFILES -->
+  <g id="table_USER_PROFILES">
+    <rect x="1160" y="430" width="280" height="298" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="1160" y="430" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="1300" y="450" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">USER_PROFILES</text>
+    <line x1="1160" y1="460" x2="1440" y2="460" stroke="#000000" stroke-width="1.5" />
+    <line x1="1340" y1="460" x2="1340" y2="728" stroke="#000000" stroke-width="1" />
+    <text x="1168" y="478" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="1188" y="478" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="1350" y="478" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1168" y="498" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="1188" y="498" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+    <text x="1350" y="498" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1170" y="518" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">age</text>
+    <text x="1350" y="518" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1170" y="538" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">gender</text>
+    <text x="1350" y="538" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="558" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">height_cm</text>
+    <text x="1350" y="558" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1170" y="578" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">weight_kg</text>
+    <text x="1350" y="578" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1170" y="598" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">activity_level</text>
+    <text x="1350" y="598" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="618" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">budget_per_day</text>
+    <text x="1350" y="618" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1170" y="638" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">health_goal</text>
+    <text x="1350" y="638" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="658" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">primary_dosha</text>
+    <text x="1350" y="658" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="678" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">digestive_fire</text>
+    <text x="1350" y="678" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="698" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">target_disease</text>
+    <text x="1350" y="698" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="718" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">profile_done</text>
+    <text x="1350" y="718" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Boolean</text>
+  </g>
+  <!-- Table: DAILY_HEALTH_LOGS -->
+  <g id="table_DAILY_HEALTH_LOGS">
+    <rect x="200" y="460" width="280" height="238" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="200" y="460" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="340" y="480" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">DAILY_HEALTH_LOGS</text>
+    <line x1="200" y1="490" x2="480" y2="490" stroke="#000000" stroke-width="1.5" />
+    <line x1="380" y1="490" x2="380" y2="698" stroke="#000000" stroke-width="1" />
+    <text x="208" y="508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="228" y="508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="390" y="508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="208" y="528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="228" y="528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+    <text x="390" y="528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="210" y="548" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">log_date</text>
+    <text x="390" y="548" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Date</text>
+    <text x="210" y="568" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">calories_consumed</text>
+    <text x="390" y="568" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="588" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">water_intake_l</text>
+    <text x="390" y="588" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="608" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">energy_rating</text>
+    <text x="390" y="608" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="210" y="628" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">digestion_quality</text>
+    <text x="390" y="628" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="210" y="648" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">ayur_score</text>
+    <text x="390" y="648" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="210" y="668" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">iron_intake_mg</text>
+    <text x="390" y="668" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="688" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">calcium_intake_mg</text>
+    <text x="390" y="688" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+  </g>
+  <!-- Table: REMINDERS -->
+  <g id="table_REMINDERS">
+    <rect x="680" y="490" width="260" height="178" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="680" y="490" width="260" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="810" y="510" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">REMINDERS</text>
+    <line x1="680" y1="520" x2="940" y2="520" stroke="#000000" stroke-width="1.5" />
+    <line x1="845" y1="520" x2="845" y2="668" stroke="#000000" stroke-width="1" />
+    <text x="688" y="538" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="708" y="538" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="855" y="538" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="688" y="558" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="708" y="558" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+    <text x="855" y="558" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="690" y="578" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">title</text>
+    <text x="855" y="578" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="598" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">reminder_time</text>
+    <text x="855" y="598" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Time</text>
+    <text x="690" y="618" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">category</text>
+    <text x="855" y="618" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="638" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">description</text>
+    <text x="855" y="638" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="658" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">enabled</text>
+    <text x="855" y="658" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Boolean</text>
+  </g>
+  <!-- Table: WOMENS_HEALTH_PROFILES -->
+  <g id="table_WOMENS_HEALTH_PROFILES">
+    <rect x="1660" y="440" width="290" height="278" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="1660" y="440" width="290" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="1805" y="460" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">WOMENS_HEALTH_PROFILES</text>
+    <line x1="1660" y1="470" x2="1950" y2="470" stroke="#000000" stroke-width="1.5" />
+    <line x1="1850" y1="470" x2="1850" y2="718" stroke="#000000" stroke-width="1" />
+    <text x="1668" y="488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="1688" y="488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="1860" y="488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1668" y="508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="1688" y="508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+    <text x="1860" y="508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">health_stage</text>
+    <text x="1860" y="528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="548" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">pregnancy_trimester</text>
+    <text x="1860" y="548" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="568" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">cycle_phase</text>
+    <text x="1860" y="568" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="588" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">last_period_date</text>
+    <text x="1860" y="588" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Date</text>
+    <text x="1670" y="608" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">cycle_length</text>
+    <text x="1860" y="608" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="628" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">flow_level</text>
+    <text x="1860" y="628" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="648" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">cramps_severity</text>
+    <text x="1860" y="648" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="668" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">mood</text>
+    <text x="1860" y="668" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="688" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">iron_target_mg</text>
+    <text x="1860" y="688" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1670" y="708" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">iron_intake_mg</text>
+    <text x="1860" y="708" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+  </g>
+  <!-- Table: WOMENS_HEALTH_LOGS -->
+  <g id="table_WOMENS_HEALTH_LOGS">
+    <rect x="2130" y="450" width="280" height="258" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="2130" y="450" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="2270" y="470" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">WOMENS_HEALTH_LOGS</text>
+    <line x1="2130" y1="480" x2="2410" y2="480" stroke="#000000" stroke-width="1.5" />
+    <line x1="2310" y1="480" x2="2310" y2="708" stroke="#000000" stroke-width="1" />
+    <text x="2138" y="498" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="2158" y="498" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="2320" y="498" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="2138" y="518" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="2158" y="518" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+    <text x="2320" y="518" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="2140" y="538" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">log_date</text>
+    <text x="2320" y="538" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Date</text>
+    <text x="2140" y="558" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">log_type</text>
+    <text x="2320" y="558" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="2140" y="578" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">flow_level</text>
+    <text x="2320" y="578" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="2140" y="598" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">cramps_severity</text>
+    <text x="2320" y="598" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="2140" y="618" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">mood</text>
+    <text x="2320" y="618" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="2140" y="638" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">energy</text>
+    <text x="2320" y="638" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="2140" y="658" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">iron_intake_mg</text>
+    <text x="2320" y="658" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="2140" y="678" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">sleep_hours</text>
+    <text x="2320" y="678" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="2140" y="698" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">wellness_score</text>
+    <text x="2320" y="698" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+  </g>
+  <!-- Table: MEAL_PLANS -->
+  <g id="table_MEAL_PLANS">
+    <rect x="1160" y="890" width="280" height="238" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="1160" y="890" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="1300" y="910" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">MEAL_PLANS</text>
+    <line x1="1160" y1="920" x2="1440" y2="920" stroke="#000000" stroke-width="1.5" />
+    <line x1="1340" y1="920" x2="1340" y2="1128" stroke="#000000" stroke-width="1" />
+    <text x="1168" y="938" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="1188" y="938" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="1350" y="938" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1168" y="958" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="1188" y="958" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+    <text x="1350" y="958" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1170" y="978" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">plan_name</text>
+    <text x="1350" y="978" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="998" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">target_disease</text>
+    <text x="1350" y="998" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="1018" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">season</text>
+    <text x="1350" y="1018" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="1038" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">health_stage</text>
+    <text x="1350" y="1038" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="1058" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">daily_budget</text>
+    <text x="1350" y="1058" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1170" y="1078" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">total_calories</text>
+    <text x="1350" y="1078" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1170" y="1098" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">nutrition_score</text>
+    <text x="1350" y="1098" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1170" y="1118" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">created_at</text>
+    <text x="1350" y="1118" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">DateTime</text>
+  </g>
+  <!-- Table: MEAL_PLAN_ITEMS -->
+  <g id="table_MEAL_PLAN_ITEMS">
+    <rect x="1160" y="1280" width="280" height="218" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="1160" y="1280" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="1300" y="1300" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">MEAL_PLAN_ITEMS</text>
+    <line x1="1160" y1="1310" x2="1440" y2="1310" stroke="#000000" stroke-width="1.5" />
+    <line x1="1340" y1="1310" x2="1340" y2="1498" stroke="#000000" stroke-width="1" />
+    <text x="1168" y="1328" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="1188" y="1328" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="1350" y="1328" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1168" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="1188" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">meal_plan_id</text>
+    <text x="1350" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1170" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">meal_type</text>
+    <text x="1350" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1170" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">day_of_week</text>
+    <text x="1350" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1168" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="1188" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">recipe_id</text>
+    <text x="1350" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1168" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="1188" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">food_item_id</text>
+    <text x="1350" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1170" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">portion_grams</text>
+    <text x="1350" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1170" y="1468" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">item_cost_inr</text>
+    <text x="1350" y="1468" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1170" y="1488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">item_calories</text>
+    <text x="1350" y="1488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+  </g>
+  <!-- Table: RECIPES -->
+  <g id="table_RECIPES">
+    <rect x="680" y="1240" width="280" height="298" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="680" y="1240" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="820" y="1260" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">RECIPES</text>
+    <line x1="680" y1="1270" x2="960" y2="1270" stroke="#000000" stroke-width="1.5" />
+    <line x1="860" y1="1270" x2="860" y2="1538" stroke="#000000" stroke-width="1" />
+    <text x="688" y="1288" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="708" y="1288" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="870" y="1288" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="690" y="1308" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">title</text>
+    <text x="870" y="1308" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1328" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">description</text>
+    <text x="870" y="1328" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">meal_type</text>
+    <text x="870" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">suitable_dosha</text>
+    <text x="870" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">suitable_season</text>
+    <text x="870" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">prep_time_mins</text>
+    <text x="870" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="690" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">cost_serving</text>
+    <text x="870" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="690" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">calories</text>
+    <text x="870" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="690" y="1468" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">protein_grams</text>
+    <text x="870" y="1468" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="690" y="1488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">carbs_grams</text>
+    <text x="870" y="1488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="690" y="1508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">fat_grams</text>
+    <text x="870" y="1508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="690" y="1528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">instructions</text>
+    <text x="870" y="1528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Text</text>
+  </g>
+  <!-- Table: FOOD_ITEMS -->
+  <g id="table_FOOD_ITEMS">
+    <rect x="1660" y="1240" width="280" height="298" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="1660" y="1240" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="1800" y="1260" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">FOOD_ITEMS</text>
+    <line x1="1660" y1="1270" x2="1940" y2="1270" stroke="#000000" stroke-width="1.5" />
+    <line x1="1840" y1="1270" x2="1840" y2="1538" stroke="#000000" stroke-width="1" />
+    <text x="1668" y="1288" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="1688" y="1288" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="1850" y="1288" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="1670" y="1308" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">name</text>
+    <text x="1850" y="1308" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="1328" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">category</text>
+    <text x="1850" y="1328" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">rasa</text>
+    <text x="1850" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">virya</text>
+    <text x="1850" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">vipaka</text>
+    <text x="1850" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">dosha_effect</text>
+    <text x="1850" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="1670" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">calories</text>
+    <text x="1850" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1670" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">protein_grams</text>
+    <text x="1850" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1670" y="1468" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">carbs_grams</text>
+    <text x="1850" y="1468" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1670" y="1488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">fat_grams</text>
+    <text x="1850" y="1488" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1670" y="1508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">iron_mg</text>
+    <text x="1850" y="1508" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="1670" y="1528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">estimated_cost</text>
+    <text x="1850" y="1528" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+  </g>
+  <!-- Table: VIRUDDHA_COMBINATIONS -->
+  <g id="table_VIRUDDHA_COMBINATIONS">
+    <rect x="2130" y="1300" width="280" height="158" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="2130" y="1300" width="280" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="2270" y="1320" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">VIRUDDHA_COMBINATIONS</text>
+    <line x1="2130" y1="1330" x2="2410" y2="1330" stroke="#000000" stroke-width="1.5" />
+    <line x1="2310" y1="1330" x2="2310" y2="1458" stroke="#000000" stroke-width="1" />
+    <text x="2138" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="2158" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="2320" y="1348" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="2138" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="2158" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">food_a_id</text>
+    <text x="2320" y="1368" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="2138" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="2158" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">food_b_id</text>
+    <text x="2320" y="1388" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="2140" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">incompatibility</text>
+    <text x="2320" y="1408" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="2140" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">hazard_reason</text>
+    <text x="2320" y="1428" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="2140" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">antidote</text>
+    <text x="2320" y="1448" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+  </g>
+  <!-- Table: RAW_FOOD_COMPOSITION -->
+  <g id="table_RAW_FOOD_COMPOSITION">
+    <rect x="200" y="1720" width="290" height="278" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="200" y="1720" width="290" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="345" y="1740" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">RAW_FOOD_COMPOSITION</text>
+    <line x1="200" y1="1750" x2="490" y2="1750" stroke="#000000" stroke-width="1.5" />
+    <line x1="390" y1="1750" x2="390" y2="1998" stroke="#000000" stroke-width="1" />
+    <text x="208" y="1768" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="228" y="1768" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="400" y="1768" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="210" y="1788" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">food_code</text>
+    <text x="400" y="1788" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="210" y="1808" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">food_name</text>
+    <text x="400" y="1808" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="210" y="1828" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">category</text>
+    <text x="400" y="1828" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="210" y="1848" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">energy_kcal</text>
+    <text x="400" y="1848" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="1868" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">protein_grams</text>
+    <text x="400" y="1868" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="1888" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">carbs_grams</text>
+    <text x="400" y="1888" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="1908" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">fat_grams</text>
+    <text x="400" y="1908" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="1928" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">fiber_grams</text>
+    <text x="400" y="1928" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="1948" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">iron_mg</text>
+    <text x="400" y="1948" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="1968" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">calcium_mg</text>
+    <text x="400" y="1968" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+    <text x="210" y="1988" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">vitamin_c_mg</text>
+    <text x="400" y="1988" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Float</text>
+  </g>
+  <!-- Table: AYURVEDIC_FOOD_PROFILES -->
+  <g id="table_AYURVEDIC_FOOD_PROFILES">
+    <rect x="680" y="1740" width="290" height="218" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <rect x="680" y="1740" width="290" height="30" fill="#FFFFFF" stroke="none" />
+    <text x="825" y="1760" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">AYURVEDIC_FOOD_PROFILES</text>
+    <line x1="680" y1="1770" x2="970" y2="1770" stroke="#000000" stroke-width="1.5" />
+    <line x1="870" y1="1770" x2="870" y2="1958" stroke="#000000" stroke-width="1" />
+    <text x="688" y="1788" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">PK</text>
+    <text x="708" y="1788" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">id</text>
+    <text x="880" y="1788" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="688" y="1808" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="bold" fill="#000000">FK</text>
+    <text x="708" y="1808" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">raw_food_id</text>
+    <text x="880" y="1808" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">Integer</text>
+    <text x="690" y="1828" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">sanskrit_name</text>
+    <text x="880" y="1828" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1848" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">rasa</text>
+    <text x="880" y="1848" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1868" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">virya</text>
+    <text x="880" y="1868" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1888" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">vipaka</text>
+    <text x="880" y="1888" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1908" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">dosha_effect</text>
+    <text x="880" y="1908" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1928" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">suitable_ritus</text>
+    <text x="880" y="1928" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+    <text x="690" y="1948" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">classical_text</text>
+    <text x="880" y="1948" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">String</text>
+  </g>
+</g>
+
+<!-- Legend Box -->
+<g id="diagram_legend">
+  <rect x="2130" y="1800" width="280" height="110" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+  <text x="2270" y="1822" font-family="'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="bold" fill="#000000" text-anchor="middle">Legend</text>
+  <line x1="2130" y1="1832" x2="2410" y2="1832" stroke="#000000" stroke-width="1.2" />
+
+  <!-- Solid Line entry -->
+  <text x="2146" y="1858" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">PK</text>
+  <text x="2175" y="1858" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">FK</text>
+  <line x1="2205" y1="1854" x2="2290" y2="1854" stroke="#000000" stroke-width="1.5" />
+  <text x="2305" y="1858" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+
+  <!-- Dashed Line entry -->
+  <text x="2146" y="1890" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">FK</text>
+  <text x="2175" y="1890" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">FK</text>
+  <line x1="2205" y1="1886" x2="2290" y2="1886" stroke="#000000" stroke-width="1.5" stroke-dasharray="6,4" />
+  <text x="2305" y="1890" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#000000">user_id</text>
+</g>
+</svg>

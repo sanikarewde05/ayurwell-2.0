@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AyurWell — Software Effort Estimation & Project Metrics Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090D16;
+      --card: #0F172A;
+      --border: #1E293B;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --cyan: #38BDF8;
+      --emerald: #34D399;
+      --amber: #FBBF24;
+      --rose: #FB7185;
+      --purple: #C084FC;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 50px 60px;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      border: 1px solid #E2E8F0;
+    }
+
+    .header-bar {
+      border-bottom: 2px solid #E2E8F0;
+      padding-bottom: 24px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #64748B;
+      line-height: 1.5;
+    }
+
+    .btn-print {
+      background: #0284C7;
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+      transition: all 0.2s ease;
+    }
+    .btn-print:hover {
+      background: #0369A1;
+      transform: translateY(-1px);
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    p, li {
+      font-size: 14.5px;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    th {
+      background: #F1F5F9;
+      color: #0F172A;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover td {
+      background: #F8FAFC;
+    }
+
+    .highlight-card {
+      background: #F0F9FF;
+      border-left: 4px solid #0284C7;
+      padding: 18px 22px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .highlight-card strong {
+      color: #0369A1;
+    }
+
+    pre {
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 20px 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .badge-primary { background: #E0F2FE; color: #0369A1; }
+    .badge-success { background: #D1FAE5; color: #047857; }
+    .badge-warning { background: #FEF3C7; color: #B45309; }
+
+    @media print {
+      body { padding: 0; background: #FFF; }
+      .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+      .btn-print { display: none; }
+      pre { background: #F1F5F9; color: #0F172A; border: 1px solid #CBD5E1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-bar">
+      <div>
+        <h1>AyurWell Healthcare Platform</h1>
+        <div class="subtitle">
+          Software Effort Estimation & Project Scale Metrics Report<br>
+          <strong>Formal Methodology:</strong> COCOMO II • Function Point Analysis (IFPUG) • Work Breakdown Structure (WBS)
+        </div>
+      </div>
+      <button class="btn-print" onclick="window.print()">
+        🖨️ Print / Save as PDF
+      </button>
+    </div>
+
+    <div class="highlight-card">
+      <strong>Executive Summary:</strong> The AyurWell platform contains <strong>16,269 active Lines of Code (LOC)</strong> across 115 source files. Parametric estimation indicates <strong>41.7 Person-Months (PM)</strong> of comprehensive lifecycle effort, or <strong>~3,200 direct engineering hours</strong>, with an agile sprint duration of <strong>11 sprints (approx. 22 weeks)</strong> for a balanced 4-developer engineering team.
+    </div>
+
+    <h2>1. Codebase Scale & Size Audit</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Subsystem</th>
+          <th>Primary Technology</th>
+          <th>Source Files</th>
+          <th>Active Code (LOC)</th>
+          <th>% Share</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Frontend Web Client</strong></td>
+          <td>React 19, TypeScript 6, Vite 8, Tailwind CSS 4</td>
+          <td>35</td>
+          <td><strong>10,811 LOC</strong></td>
+          <td><span class="badge badge-primary">66.5%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Backend Core Application</strong></td>
+          <td>Java 17/25, Spring Boot 3.2, Spring Security, JPA</td>
+          <td>76</td>
+          <td><strong>5,149 LOC</strong></td>
+          <td><span class="badge badge-success">31.6%</span></td>
+        </tr>
+        <tr>
+          <td><strong>AI / ML Microservice</strong></td>
+          <td>Python 3.10+, FastAPI, Scikit-learn, Pydantic</td>
+          <td>4</td>
+          <td><strong>309 LOC</strong></td>
+          <td><span class="badge badge-warning">1.9%</span></td>
+        </tr>
+        <tr style="background:#F1F5F9; font-weight:bold;">
+          <td>TOTAL APPLICATION CODE</td>
+          <td>Polyglot Multi-Tier Stack</td>
+          <td>115 Files</td>
+          <td>16,269 LOC (~16.3 KLOC)</td>
+          <td>100.0%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>2. COCOMO II (Constructive Cost Model) Estimation</h2>
+    <p>Using the standard <strong>Semi-Detached</strong> software profile:</p>
+    <ul>
+      <li><strong>Effort Equation:</strong> <code>PM = A × (KLOC)^E × ∏ EAF</code></li>
+      <li>Parameters: <code>A = 2.94</code>, <code>KLOC = 16.27</code>, <code>E = 1.05</code>, <code>EAF = 0.76</code></li>
+      <li><strong>Estimated Effort:</strong> <strong>41.74 Person-Months (PM)</strong></li>
+      <li><strong>Development Time (TDEV):</strong> <code>TDEV = 3.67 × (41.74)^0.31 ≈ 11.6 Months</code> (Single developer baseline)</li>
+      <li><strong>Optimal Team Size:</strong> <code>41.74 / 11.6 ≈ 4 Full-Time Engineers</code> (Projected calendar time: <strong>~3.0 to 3.2 months</strong>)</li>
+    </ul>
+
+    <h2>3. Function Point Analysis (FPA - IFPUG Standard)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Component Type</th>
+          <th>AyurWell Implementation Scope</th>
+          <th>Count</th>
+          <th>Weight</th>
+          <th>Total FPs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Internal Logical Files (ILF)</strong></td>
+          <td>15 Relational Tables (users, profiles, meal_plans, foods, etc.)</td>
+          <td>15</td>
+          <td>10</td>
+          <td>150 FPs</td>
+        </tr>
+        <tr>
+          <td><strong>External Interface Files (EIF)</strong></td>
+          <td>ICMR-NIN IFCT Dataset, SMTP Mail Server, Cloud LLM Provider</td>
+          <td>3</td>
+          <td>7</td>
+          <td>21 FPs</td>
+        </tr>
+        <tr>
+          <td><strong>External Inputs (EI)</strong></td>
+          <td>Auth, OTP, Prakriti Quiz, Diet Generator, Logs, Reminders</td>
+          <td>18</td>
+          <td>4</td>
+          <td>72 FPs</td>
+        </tr>
+        <tr>
+          <td><strong>External Outputs (EO)</strong></td>
+          <td>AyurScore Gauge, Radar Charts, Weekly Meal Schedules, Alerts</td>
+          <td>12</td>
+          <td>5</td>
+          <td>60 FPs</td>
+        </tr>
+        <tr>
+          <td><strong>External Inquiries (EQ)</strong></td>
+          <td>Recipe Catalog, Food Composition, Viruddha Conflict Lookups</td>
+          <td>11</td>
+          <td>3</td>
+          <td>33 FPs</td>
+        </tr>
+        <tr style="background:#F1F5F9; font-weight:bold;">
+          <td colspan="4">UNADJUSTED FUNCTION POINTS (UFP)</td>
+          <td>336 UFP</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Value Adjustment Factor (VAF) = <strong>1.07</strong> (TDI = 42). <strong>Adjusted Function Points (AFP) = 359.5 AFPs</strong>.<br>
+    At industry average of 10 hrs/FP: <strong>3,595 Engineering Hours (~22.5 Person-Months)</strong>.</p>
+
+    <h2>4. Work Breakdown Structure (WBS) Engineering Hours</h2>
+    <pre>
+1. Domain Research &amp; Clinical Data Modeling ───────── 260 Hours
+2. Database Architecture &amp; DDL Implementation ────── 220 Hours
+3. Backend REST Core Application (Spring Boot) ───── 780 Hours
+4. Machine Learning &amp; Python Microservice (FastAPI) ─ 320 Hours
+5. Frontend Single Page Application (React 19 + TS) ── 990 Hours
+6. Quality Assurance, Testing &amp; Validation ────────── 380 Hours
+7. Deployment, DevOps &amp; Technical Documentation ────── 250 Hours
+─────────────────────────────────────────────────────────────────
+TOTAL DIRECT ENGINEERING EFFORT:                    3,200 Hours</pre>
+
+    <h2>5. Agile Scrum Story Points &amp; Sprints</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Epic Domain</th>
+          <th>Key Functional Scope</th>
+          <th>Stories</th>
+          <th>Story Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Epic 1: Identity &amp; Security</strong></td><td>JWT Auth, BCrypt, OTP Verification, Roles</td><td>9</td><td>38 SP</td></tr>
+        <tr><td><strong>Epic 2: Diagnostic Prakriti</strong></td><td>30-Question Quiz, Tridosha Calculation, Agni</td><td>7</td><td>34 SP</td></tr>
+        <tr><td><strong>Epic 3: AI Diet &amp; Nutrition</strong></td><td>7-Day Disease Diet Engine, ICMR Constraints</td><td>14</td><td>76 SP</td></tr>
+        <tr><td><strong>Epic 4: Viruddha Ahara</strong></td><td>Toxic Pairing Scanner, Antidote Advice</td><td>8</td><td>36 SP</td></tr>
+        <tr><td><strong>Epic 5: Women's Health</strong></td><td>Cycle Tracker, Pregnancy Trimester Scaler</td><td>14</td><td>72 SP</td></tr>
+        <tr><td><strong>Epic 6: ML &amp; Analytics</strong></td><td>Deficiency Risk Prediction, Dinacharya Timers</td><td>12</td><td>56 SP</td></tr>
+        <tr style="background:#F1F5F9; font-weight:bold;">
+          <td>TOTAL AGILE SCOPE</td>
+          <td>Full System MVP &amp; Production Iterations</td>
+          <td>64 Stories</td>
+          <td>312 Story Points</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Based on a 2-week sprint cadence with velocity of 30 SP/sprint: <strong>11 Sprints (approx. 22 Calendar Weeks / 5.5 Months)</strong>.</p>
+
+    <h2>6. Effort &amp; Valuation Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Estimation Metric</th>
+          <th>Estimated Quantity</th>
+          <th>Timeline / Schedule Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>COCOMO II Parametric Model</strong></td><td><strong>41.7 Person-Months</strong></td><td>11.6 Months (1 Dev) / <strong>3.0 Months (4 Devs)</strong></td></tr>
+        <tr><td><strong>Function Point Analysis (AFP)</strong></td><td><strong>359.5 Function Points</strong></td><td>~3,595 Engineering Hours</td></tr>
+        <tr><td><strong>Bottom-Up WBS Engineering</strong></td><td><strong>3,200 Direct Hours</strong></td><td>~20 Person-Months</td></tr>
+        <tr><td><strong>Agile Scrum Story Points</strong></td><td><strong>312 Story Points</strong></td><td>11 Sprints (22 Calendar Weeks)</td></tr>
+        <tr><td><strong>Commercial Valuation Benchmark</strong></td><td><strong>$128,000 – $160,000</strong></td><td>At blended industry rate of $40–$50 / hour</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
